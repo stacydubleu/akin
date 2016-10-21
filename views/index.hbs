@@ -1,2 +1,15 @@
-<h1>HELLO</h1>
+<h1 style="font-size:60px">HELLO</h1>
 <p>Welcome to {{greeting}}</p>
+
+<form action="/writeComment" method="POST" style="display:flex;align-items:center">
+    <p style="margin-right:10px">Leave a Comment: </p>
+    <input style="width:50%;height:10px;margin-right:10px" required="required" type="text" name="comment" value="">
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<div id="commentWall">
+
+<h1>Comments:</h1>
+
+</div>

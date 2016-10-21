@@ -1,9 +1,9 @@
 {
   "name": "akin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node server/app.js",
+    "start": "node server/app.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -14,10 +14,10 @@
     "express": "~4.13.1",
     "firebase": "^3.4.0",
     "hbs": "~3.1.0",
-    "nodemon": "~1.10.2",
     "mocha": "~3.1.0",
+    "mongodb": "^2.2.11",
     "morgan": "~1.6.1",
+    "nodemon": "~1.10.2",
     "serve-favicon": "~2.3.0"
   }
 }
-
