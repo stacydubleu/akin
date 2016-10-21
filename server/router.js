@@ -6,4 +6,6 @@ var mainController = require('./controllers/mainController');
 
 router.get('/', mainController.main);
 
+router.post('/writeComment', mainController.writeComment);
+
 module.exports = router;
