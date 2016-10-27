@@ -1,20 +1,25 @@
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var hbs = require('hbs');
 
 var MongoClient = require('mongodb').MongoClient;
 var db;
 
+// exposes join method to chain variables together
+// join method used instead of specifying full file path - avoid OS operating isues
+// with forward and backslashes
+
 var app = express();
-var router = require('./router');
 
 // Initialize mongodb connection
-MongoClient.connect("mongodb://localhost:27017/akinDB", function (err, database) {
+MongoClient.connect("mongodb://akintestme:akintesting1@ds031965.mlab.com:31965/users", function (err, database) {
     if (err) {
-        console.log("\n\t *******\n mongodb connection error. ", err);
+        console.log("\n\t WE HAVE A PROBLEM\n mongodb connection error. ", err);
         throw err;
     }
     console.log("MongoDB connected successfully");
@@ -34,6 +39,11 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+//declare public folder as static
+// __dirname - native Node variable contain file path of current folder
+// second param is name of static resource folder
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('./public'));
 
@@ -43,7 +53,11 @@ app.set('trust proxy', true);
 app.set('view engine', 'hbs');
 
 //router setup
-app.use('/', router);
+
+var routes = require('./router');
+app.use('/', routes);
+app.use('/login', routes);
+app.use('/send_ping', routes);
 
 var port = process.env.PORT || 1111;
 app.listen(port, function() {

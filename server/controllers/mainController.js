@@ -1,10 +1,7 @@
 var path = require('path');
 
 module.exports.main = function(request, response) {
-
-
-    response.render('index', { greeting: 'akin!' });
-
+    response.render('index', { greeting: 'AKIN' });
 };
 
 module.exports.writeComment = function(request, response) {
