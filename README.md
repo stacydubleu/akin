@@ -3,8 +3,8 @@
 
 ##Install node
 ##Type npm install from console to download dependencies
-##Type source .env to load environment keys
-##Run with 'nodemon' or 'npm start'
+##Type source .env from console to load environment keys
+##Run with 'nodemon' or 'npm start' from console
 
 ##Resources: 
 <a href="https://www.firebase.com/docs/web/quickstart.html">Firebase Web QuickStart Guide</a><br>
