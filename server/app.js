@@ -9,7 +9,7 @@ var stormpath = require('express-stormpath');
 var socketIO = require('socket.io');
 
 //for secret keys and passwords
-var dotenv= require('dotenv');
+var dotenv = require('dotenv');
 dotenv.load();
 
 var port = process.env.EXPRESS_PORT || 1111;
@@ -35,9 +35,9 @@ io.on('connection', function(socket) {
 });
 
 // Initialize mongodb connection
-var mdbuser=process.env.USERNAME_MLAB;
-var mdbpw=process.env.PASSWORD_MLAB;
-MongoClient.connect("mongodb://"+mdbuser+":"+mdbpw+"@ds031965.mlab.com:31965/users", function(err, database) {
+var mdbuser = process.env.USERNAME_MLAB;
+var mdbpw = process.env.PASSWORD_MLAB;
+MongoClient.connect("mongodb://" + mdbuser + ":" + mdbpw + "@ds031965.mlab.com:31965/users", function(err, database) {
     if (err) {
         console.log("\n\t WE HAVE A PROBLEM\n mongodb connection error. ", err);
         throw err;
@@ -80,15 +80,20 @@ app.use('/', router);
 //stormpath linking up
 app.use(stormpath.init(app, {
     website: true,
-    postRegistrationHandler: function(account, req, res) {
-        res.redirect('/');
+    register: {
+        enabled: true,
+        autoLogin: true,
+        autoAuthorize: true
     },
-    postLoginHandler: function(account, req, res) {
-        res.redirect('/');
-    },
-    postLogoutHandler: function(account, req, res) {
-        res.redirect('/');
-    }
+    // postRegistrationHandler: function(account, req, res) {
+    //     res.redirect('/');
+    // },
+    // postLoginHandler: function(account, req, res) {
+    //     res.redirect('/');
+    // },
+    // postLogoutHandler: function(account, req, res) {
+    //     res.redirect('/');
+    // }
 }));
 
 //start server when stormpath is ready
