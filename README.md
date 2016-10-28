@@ -2,6 +2,8 @@
 <a href="https://docs.google.com/document/d/1qeXu8AXtqnfHJgClvhYXpDspO3LG5aC7vvzBhDhGx-8/edit?usp=sharing">Google Docs</a>
 
 ##Install node
+##Type npm install from console to download dependencies
+##Type source .env to load environment keys
 ##Run with 'nodemon' or 'npm start'
 
 ##Resources: 
