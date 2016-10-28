@@ -14,4 +14,9 @@
 
      });
 
+     $("#postPing-btn").click(function() {
+     	$.post("/postPing");
+     });
+
+
  });

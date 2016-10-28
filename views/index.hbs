@@ -20,12 +20,13 @@
         </div>
         <br> {{#if name}}
         <div class="row text-center">
-            <form class="form-inline" action="/postPing" name="postPing" method="post">
-                <button id="postPing-btn" type="submit" class="btn btn-success">SEND PING</button>
-            </form>
+{{!--             <form class="form-inline" action="/postPing" name="postPing" method="post">
+ --}}                <button id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
+{{!--             </form>
+ --}}            <h1 id="pingLog"></h1>
+            <div id="pingDiv" style="height:300px;overflow: hidden">
 
-			<h1 id="pingLog"></h1>
-
+            </div>
         </div>
         {{/if}}
     </div>
@@ -34,7 +35,9 @@
 <script>
 var socket = io();
 socket.on('testing', function(msg) {
-    $("#pingLog").text(msg);
+    // $("#pingLog").text(msg);
+    $("body").effect("shake");
+    $( "<h3>"+msg+"</h3>" ).prependTo( "#pingDiv" );
     console.log(msg);
 });
 </script>
