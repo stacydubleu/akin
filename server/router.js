@@ -1,16 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var bodyP = require('body-parser');
+var stormpath = require('express-stormpath');
 
-var mainController = require('../controllers/mainController');
-router.get('/', mainController.main);
-router.post('/writeComment', mainController.writeComment);
 
-var loginController = require('../controllers/loginController');
-router.get('/login', loginController.main);
+var mainController = require('./controllers/mainController');
+var mapController = require('./controllers/mapController');
+var pingController = require('./controllers/pingController');
 
-var sendPingController = require('../controllers/sendPingController');
-router.get('/send_ping', sendPingController.main);
+//main page controller routes
+router.get('/', stormpath.getUser, mainController.getIndex);
+
+//ping controller routes
+router.get('/get_ping', stormpath.loginRequired, pingController.getPing);
+router.post('/postPing', stormpath.loginRequired, pingController.postPing);
+
+//map controller routes
+router.get('/get_map', stormpath.loginRequired, mapController.getMap);
 
 
 module.exports = router;

@@ -1,15 +1,41 @@
-<h1 style="font-size:60px">HELLO</h1>
-<p>Welcome to {{greeting}}</p>
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <h1 style="font-size:60px">HELLO {{name}}</h1>
+            <h4>Welcome to {{greeting}}</h4>
+            <br>
+            <form class="form-inline" action="/logout" name="logout" method="post">
+                {{#unless name}}
+                <a href="/login">
+                    <button id="login-button" type="button" class="btn btn-primary">LOG IN</button>
+                </a>
+                {{/unless}} {{#unless name}}
+                <a href="/register">
+                    <button id="register-button" type="button" class="btn btn-info">REGISTER</button>
+                </a>
+                {{/unless}} {{#if name}}
+                <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
+                {{/if}}
+            </form>
+        </div>
+        <br> {{#if name}}
+        <div class="row text-center">
+            <form class="form-inline" action="/postPing" name="postPing" method="post">
+                <button id="postPing-btn" type="submit" class="btn btn-success">SEND PING</button>
+            </form>
 
-<form action="/writeComment" method="POST" style="display:flex;align-items:center">
-    <p style="margin-right:10px">Leave a Comment: </p>
-    <input style="width:50%;height:10px;margin-right:10px" required="required" type="text" name="comment" value="">
-    <br>
-    <input type="submit" value="Submit">
-</form>
+			<h1 id="pingLog"></h1>
 
-<div id="commentWall">
-
-<h1>Comments:</h1>
-
-</div>
+        </div>
+        {{/if}}
+    </div>
+</body>
+{{!-- client side scripts --}}
+<script>
+var socket = io();
+socket.on('testing', function(msg) {
+    $("#pingLog").text(msg);
+    console.log(msg);
+});
+</script>
+<script src="/js/welcome.js"></script>

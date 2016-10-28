@@ -1,4 +1,3 @@
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,18 +5,33 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
+var stormpath = require('express-stormpath');
+var socketIO = require('socket.io');
+
+var port = process.env.EXPRESS_PORT || 1111;
 
 var MongoClient = require('mongodb').MongoClient;
 var db;
 
-// exposes join method to chain variables together
-// join method used instead of specifying full file path - avoid OS operating isues
-// with forward and backslashes
-
 var app = express();
 
+//socket io linking
+var server = require('http').Server(app);
+var io = socketIO(server);
+
+var router = require('./router');
+
+
+//socket.io debugging
+io.on('connection', function(socket) {
+    console.log('a user connected');
+    socket.on('disconnect', function() {
+        console.log('user disconnected');
+    });
+});
+
 // Initialize mongodb connection
-MongoClient.connect("mongodb://akintestme:akintesting1@ds031965.mlab.com:31965/users", function (err, database) {
+MongoClient.connect("mongodb://akintestme:akintesting1@ds031965.mlab.com:31965/users", function(err, database) {
     if (err) {
         console.log("\n\t WE HAVE A PROBLEM\n mongodb connection error. ", err);
         throw err;
@@ -26,11 +40,12 @@ MongoClient.connect("mongodb://akintestme:akintesting1@ds031965.mlab.com:31965/u
     db = database;
 });
 
-// Expose our db to our router
-app.use(function (req, res, next) {
+// Expose our db and io to our router
+app.use(function(req, res, next) {
     req.db = db;
+    req.io = io;
     req.app_setting_port = port;
-    req.myParisite = {'left': 'right'};
+    req.myParisite = { 'left': 'right' };
     next();
 });
 
@@ -40,7 +55,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
 //declare public folder as static
 // __dirname - native Node variable contain file path of current folder
 // second param is name of static resource folder
@@ -49,20 +63,41 @@ app.use(express.static('./public'));
 
 // view engine setup
 app.set('trust proxy', true);
+
 // app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 //router setup
+app.use('/', router);
 
-var routes = require('./router');
-app.use('/', routes);
-app.use('/login', routes);
-app.use('/send_ping', routes);
 
-var port = process.env.PORT || 1111;
-app.listen(port, function() {
-    console.log('Application running at http://localhost:' + port);
+//stormpath linking up
+app.use(stormpath.init(app, {
+    website: true,
+    postRegistrationHandler: function(account, req, res) {
+        res.redirect('/');
+    },
+    postLoginHandler: function(account, req, res) {
+        res.redirect('/');
+    },
+    postLogoutHandler: function(account, req, res) {
+        res.redirect('/');
+    }
+}));
+
+//start server when stormpath is ready
+app.on('stormpath.ready', function() {
+    console.log('Stormpath Ready');
+    var port = process.env.PORT || 1111;
+    server.listen(port, function() {
+        console.log('Application running at http://localhost:' + port);
+    });
 });
+
+
+//////////////////
+//error handling//
+//////////////////
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
