@@ -1,44 +1,50 @@
-<body>
-    <div class="container">
-        <div class="row text-center">
-            <h1 style="font-size:60px">HELLO {{name}}</h1>
-            <h4>Welcome to {{greeting}}</h4>
-            <br>
-            <form class="form-inline" action="/logout" name="logout" method="post">
-                {{#unless name}}
-                <a href="/login">
-                    <button id="login-button" type="button" class="btn btn-primary">LOG IN</button>
-                </a>
-                {{/unless}} {{#unless name}}
-                <a href="/register">
-                    <button id="register-button" type="button" class="btn btn-info">REGISTER</button>
-                </a>
-                {{/unless}} {{#if name}}
-                <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
-                {{/if}}
+<link rel="stylesheet" href="/stylesheets/index.css">
+<div class="container">
+    <div class="row text-center">
+        <h1 style="font-size:60px">HELLO {{name}}</h1>
+        <h4>Welcome to {{greeting}}</h4>
+        <br>
+        <form class="form-inline" action="/logout" name="logout" method="post">
+            {{#unless name}}
+            <a href="/login">
+                <button id="login-button" type="button" class="btn btn-primary">LOG IN</button>
+            </a>
+            {{/unless}} {{#unless name}}
+            <a href="/register">
+                <button id="register-button" type="button" class="btn btn-info">REGISTER</button>
+            </a>
+            {{/unless}} {{#if name}}
+            <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
+            {{/if}}
+        </form>
+    </div>
+    <br> {{#if name}}
+    <div class="row text-center">
+        <div style="display: flex;align-items:center;justify-content:center">
+            <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
+                <button id="getMap-btn" type="submit" class="btn btn-primary">MAP</button>
+            </form>
+            <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
+            <form class="" action="/getBox" name="getBox" method="get">
+                <button id="getBox-btn" type="submit" class="btn btn-info">BOX</button>
             </form>
         </div>
-        <br> {{#if name}}
-        <div class="row text-center">
-{{!--             <form class="form-inline" action="/postPing" name="postPing" method="post">
- --}}                <button id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
-{{!--             </form>
- --}}            <h1 id="pingLog"></h1>
-            <div id="pingDiv" style="height:300px;overflow: hidden">
-
-            </div>
+        <h1 id="pingLog"></h1>
+        <div id="pingDiv" style="height:300px;max-height:300px;overflow: scroll">
         </div>
-        {{/if}}
     </div>
-</body>
+    {{/if}}
+</div>
 {{!-- client side scripts --}}
 <script>
 var socket = io();
 socket.on('testing', function(msg) {
     // $("#pingLog").text(msg);
     $("body").effect("shake");
-    $( "<h3>"+msg+"</h3>" ).prependTo( "#pingDiv" );
+
+    //TODO: reduce height of dom on each prepend, page height grows on each ping
+    $("<h3>" + msg + "</h3>").prependTo("#pingDiv");
     console.log(msg);
 });
 </script>
-<script src="/js/welcome.js"></script>
+<script src="/js/main.js"></script>

@@ -1,10 +1,6 @@
  $(document).ready(function() {
 
-     console.log('welcome.js loaded');
-
-     // $("#logout-button").click(function() {
-     //     $.post("/logout");
-     // });
+     console.log('main.js loaded');
 
      $("#login-button").click(function() {
 
@@ -15,7 +11,11 @@
      });
 
      $("#postPing-btn").click(function() {
-     	$.post("/postPing");
+         $.post("/postPing");
+     });
+
+     $("#getMap-btn").click(function() {
+         $.get("/getMap");
      });
 
 

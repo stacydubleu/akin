@@ -25,7 +25,6 @@ var io = socketIO(server);
 
 var router = require('./router');
 
-
 //socket.io debugging
 io.on('connection', function(socket) {
     console.log('a user connected');
@@ -46,6 +45,8 @@ MongoClient.connect("mongodb://" + mdbuser + ":" + mdbpw + "@ds031965.mlab.com:3
     db = database;
 });
 
+
+
 // Expose our db and io to our router
 app.use(function(req, res, next) {
     req.db = db;
@@ -55,8 +56,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-//uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+//favicon is not loading
+app.use(favicon(path.join('./public/images/favicon.ico')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -76,7 +79,6 @@ app.set('view engine', 'hbs');
 //router setup
 app.use('/', router);
 
-
 //stormpath linking up
 app.use(stormpath.init(app, {
     website: true,
@@ -85,15 +87,6 @@ app.use(stormpath.init(app, {
         autoLogin: true,
         autoAuthorize: true
     },
-    // postRegistrationHandler: function(account, req, res) {
-    //     res.redirect('/');
-    // },
-    // postLoginHandler: function(account, req, res) {
-    //     res.redirect('/');
-    // },
-    // postLogoutHandler: function(account, req, res) {
-    //     res.redirect('/');
-    // }
 }));
 
 //start server when stormpath is ready
