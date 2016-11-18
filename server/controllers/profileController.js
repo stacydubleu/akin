@@ -2,6 +2,8 @@ var path = require('path');
 
 var userHref;
 var userName;
+var signal;
+var signalColor;
 
 
 module.exports.getProfile = function(request, response) {
@@ -12,9 +14,18 @@ module.exports.getProfile = function(request, response) {
         if (err) throw err;
         else {
             userName = result.userName;
+            signal = result.signal;
+            console.log(signal);
+            if (signal === "active") {
+            	signalColor = 'green';
+            } else if (signal === "inactive") {
+            	signalColor = 'red';
+            }
             response.render('profile', {
                 userHref: userHref,
-                userName: userName
+                userName: userName,
+                signal: signal,
+                signalColor: signalColor
             });
         }
     });

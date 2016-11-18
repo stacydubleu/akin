@@ -1,54 +1,36 @@
 var path = require('path');
 var Promise = require("bluebird");
 
-
 module.exports.getPing = function(request, response) {
 
 };
 
-var handleError = function(error) {
-    console.log('Error compiling active signals');
+module.exports.deleteSignal = function(request, response) {
+
+    var userHref = request.body.userHref;
+
+    request.db.collection('users').update({ "userId": userHref }, {
+        $set: {
+            signal: "inactive",
+        }
+    }, { upsert: true }).then(function() {
+        response.send({ signal: 'inactive' });
+    });
+
 };
 
 module.exports.getActive = function(request, response) {
 
-  request.db.collection('users').find({ "signal": "active" }).toArray(function(err, result) {
-    	// console.log(result);
-    	// console.log(result[0].userName);
+    request.db.collection('users').find({ "signal": "active" }).toArray(function(err, result) {
+        // console.log(result);
+        // console.log(result[0].userName);
         if (err) throw err;
         else {
             response.send(result);
         }
 
     });
-
-
-    // cursor.forEach(function(data) {
-    // 	console.log(data.userName + "abc");
-    // });
-
-    // if (cursor) {
-    //     getActiveSignals(cursor, response).catch(handleError);
-    // } else {
-    //     response.sendStatus(400);
-    // }
 };
-
-
-// module.exports.getActive = function(request, response) {
-
-//     var cursor = request.db.collection('users').find({ signal: "active" });
-//     var userArray = [];
-
-//     cursor.forEach(function(data) {
-//         var userName = data.userName;
-//         userArray.push(userName);
-//     }).then(function() {
-//         console.log(userArray);
-//         response.send(userArray);
-//     });
-
-// };
 
 module.exports.postPing = function(request, response) {
     // console.log(request.user.givenName + ' sent a ping');
@@ -58,7 +40,7 @@ module.exports.postPing = function(request, response) {
     var userName = request.user.givenName;
     var signal = "";
 
-    request.db.collection('users').findOne({ userId: userId }, { signal: "active" }, function(err, res) {
+    request.db.collection('users').findOne({ $and: [{ userId: userId }, { signal: "active" }] }, function(err, res) {
         if (res) {
             signal = 'active';
             io.emit('testing', userName + "'s signal is already on..");
@@ -80,6 +62,6 @@ module.exports.postPing = function(request, response) {
         }, { upsert: true }).then(function() {
             response.send({ userName: userName });
         });
-    };
+    }
 
 };

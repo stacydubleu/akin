@@ -23,23 +23,23 @@
     <div class="row text-center">
         <div style="display: flex;align-items:center;justify-content:center;spacemargin-bottom:20px">
             <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
-                <button id="getMap-btn" type="submit" class="btn btn-primary">MAP VIEW</button>
+                <button id="getMap-btn" type="submit" class="btn btn-primary">VIEW MAP</button>
             </form>
             <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
-            <form class="" action="/getBox" name="getBox" method="get">
-                <button id="getBox-btn" type="submit" class="btn btn-info">INVENTORY</button>
+            <form class="" action="/profile/{{userId}}" name="getBox" method="get">
+                <button id="getBox-btn" type="submit" class="btn btn-info">PROFILE</button>
             </form>
         </div>
     </div>
     <br>
     <div class="row text-center ">
-        <div class="col-xs-6 col-sm-6 col-md-6" style="border:solid black 1px;height:300px;max-height:300px;overflow: scroll; margin: 0 auto">
+        <div class="col-xs-12 col-sm-6 col-md-6" style="border:solid black 1px;height:350px;max-height:400px;overflow: scroll; margin: 0 auto">
             <h3>Signal Log</h3>
             <hr>
             <div id="pingLog">
             </div>
         </div>
-        <div class="col-xs-6 col-sm-6 col-md-6" style="border:solid black 1px;height:300px;max-height:300px;overflow: scroll; margin: 0 auto">
+        <div class="col-xs-12 col-sm-6 col-md-6" style="border:solid black 1px;height:350px;max-height:400px;overflow: scroll; margin: 0 auto">
             <h3>Active Signals</h3>
             <hr>
             <div id="activeLog" style="display:flex;flex-direction:column">
