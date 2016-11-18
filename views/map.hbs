@@ -5,6 +5,8 @@
 <script type='text/javascript' src='/js/planetaryjs.min.js'></script>
 <script src="/js/jquery-jvectormap-2.0.3.min.js"></script>
 <script src="/js/jquery-jvectormap-world-mill.js"></script>
+
+{{!-- body --}}
 <div class="container">
     <div class="row text-center">
         <a href="/">
@@ -12,12 +14,19 @@
         </a>
         <h1 style="font-size:60px">MAP VIEW</h1>
         <hr>
+        <h2>PlanetaryJS</h2>
         <canvas id='rotatingGlobe' width='400' height='400' style='width: 400px; height: 400px; cursor: move;'></canvas>
         <br>
+        <hr>
+        <h2>jVectorMap</h2>
         <div id="world-map" style="width: 540px; height: 320px; margin: 0 auto"></div>
     </div>
 </div>
+
+{{!-- PlanetaryJS init script --}}
 <script type='text/javascript' src='/js/map.js'></script>
+
+{{!-- jVectorMap init script --}}
 <script>
 $(function() {
     $('#world-map').vectorMap({

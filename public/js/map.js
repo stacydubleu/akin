@@ -34,8 +34,8 @@
             this.plugins.autorotate.resume();
         }
     }));
-    // Set up the globe's initial scale, offset, and rotation.
-    globe.projection.scale(175).translate([175, 175]).rotate([0, -10, 0]);
+    // Set up the globe's initial scale, offset, and rotation. //TODO: Modify offset based on resolution
+    globe.projection.scale(175).translate([200, 200]).rotate([0, -10, 0]);
 
     // Every few hundred milliseconds, we'll draw another random ping.
     var colors = ['red', 'yellow', 'white', 'orange', 'green', 'cyan', 'pink'];

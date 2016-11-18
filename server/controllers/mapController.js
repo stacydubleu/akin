@@ -6,5 +6,4 @@ module.exports.getMap = function(request, response) {
 
     response.render('map', {name: name});
 
-
 };

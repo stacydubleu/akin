@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/stylesheets/index.css">
+{{!-- style sheets --}}
+<link rel="stylesheet" href="/stylesheets/index.css"> {{!-- body --}}
 <div class="container">
     <div class="row text-center">
         <h1 style="font-size:60px">HELLO {{name}}</h1>
@@ -20,7 +21,7 @@
     </div>
     <br> {{#if name}}
     <div class="row text-center">
-        <div style="display: flex;align-items:center;justify-content:center">
+        <div style="display: flex;align-items:center;justify-content:center;margin-bottom:20px">
             <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
                 <button id="getMap-btn" type="submit" class="btn btn-primary">MAP</button>
             </form>
@@ -29,22 +30,24 @@
                 <button id="getBox-btn" type="submit" class="btn btn-info">BOX</button>
             </form>
         </div>
-        <h1 id="pingLog"></h1>
-        <div id="pingDiv" style="height:300px;max-height:300px;overflow: scroll">
+    </div>
+    <br>
+    <div class="row text-center ">
+        <div class="col-xs-6 col-sm-6 col-md-6" style="border:solid black 1px;height:300px;max-height:300px;overflow: scroll; margin: 0 auto">
+            <h3>Signal Log</h3>
+            <hr>
+            <div id="pingLog">
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6" style="border:solid black 1px;height:300px;max-height:300px;overflow: scroll; margin: 0 auto">
+            <h3>Active Signals</h3>
+            <hr>
+            <div id="activeLog">
+            </div>
         </div>
     </div>
     {{/if}}
 </div>
 {{!-- client side scripts --}}
-<script>
-var socket = io();
-socket.on('testing', function(msg) {
-    // $("#pingLog").text(msg);
-    $("body").effect("shake");
-
-    //TODO: reduce height of dom on each prepend, page height grows on each ping
-    $("<h3>" + msg + "</h3>").prependTo("#pingDiv");
-    console.log(msg);
-});
-</script>
-<script src="/js/main.js"></script>
+<script src="/js/clientSocket.js"></script>
+<script src="/js/index.js"></script>
