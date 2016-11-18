@@ -61,7 +61,7 @@ module.exports.postPing = function(request, response) {
     request.db.collection('users').findOne({ userId: userId }, { signal: "active" }, function(err, res) {
         if (res) {
             signal = 'active';
-            io.emit('testing', userName + "'s signal is already active!");
+            io.emit('testing', userName + "'s signal is already on..");
             response.send({ userName: userName });
         } else {
             signal = 'inactive';

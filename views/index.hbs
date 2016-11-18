@@ -2,32 +2,32 @@
 <link rel="stylesheet" href="/stylesheets/index.css"> {{!-- body --}}
 <div class="container">
     <div class="row text-center">
-        <h1 style="font-size:60px">HELLO {{name}}</h1>
-        <h4>Welcome to {{greeting}}</h4>
-        <br>
-        <form class="form-inline" action="/logout" name="logout" method="post">
-            {{#unless name}}
-            <a href="/login">
-                <button id="login-button" type="button" class="btn btn-primary">LOG IN</button>
-            </a>
-            {{/unless}} {{#unless name}}
-            <a href="/register">
-                <button id="register-button" type="button" class="btn btn-info">REGISTER</button>
-            </a>
-            {{/unless}} {{#if name}}
-            <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
-            {{/if}}
-        </form>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <h1 style="font-size:60px">HELLO {{name}}</h1>
+            <form style="display:flex;align-items:center;justify-content:center" class="form-inline" action="/logout" name="logout" method="post">
+                <h4 style="margin-right:15px">Welcome to {{greeting}}</h4> {{#unless name}}
+                <a href="/login" style="margin-right:15px">
+                    <button id="login-button" type="button" class="btn btn-primary">LOG IN</button>
+                </a>
+                {{/unless}} {{#unless name}}
+                <a href="/register">
+                    <button id="register-button" type="button" class="btn btn-info">REGISTER</button>
+                </a>
+                {{/unless}} {{#if name}}
+                <button style="font-size:10px" id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
+                {{/if}}
+            </form>
+        </div>
     </div>
     <br> {{#if name}}
     <div class="row text-center">
-        <div style="display: flex;align-items:center;justify-content:center;margin-bottom:20px">
+        <div style="display: flex;align-items:center;justify-content:center;spacemargin-bottom:20px">
             <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
-                <button id="getMap-btn" type="submit" class="btn btn-primary">MAP</button>
+                <button id="getMap-btn" type="submit" class="btn btn-primary">MAP VIEW</button>
             </form>
             <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
             <form class="" action="/getBox" name="getBox" method="get">
-                <button id="getBox-btn" type="submit" class="btn btn-info">BOX</button>
+                <button id="getBox-btn" type="submit" class="btn btn-info">INVENTORY</button>
             </form>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="col-xs-6 col-sm-6 col-md-6" style="border:solid black 1px;height:300px;max-height:300px;overflow: scroll; margin: 0 auto">
             <h3>Active Signals</h3>
             <hr>
-            <div id="activeLog">
+            <div id="activeLog" style="display:flex;flex-direction:column">
             </div>
         </div>
     </div>
