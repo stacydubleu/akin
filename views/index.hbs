@@ -1,12 +1,12 @@
-<body>
-    <div class="container">
-        <div class="row text-center">
+{{!-- style sheets --}}
+<link rel="stylesheet" href="/stylesheets/index.css"> {{!-- body --}}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <h1 style="font-size:60px">HELLO {{name}}</h1>
-            <h4>Welcome to {{greeting}}</h4>
-            <br>
-            <form class="form-inline" action="/logout" name="logout" method="post">
-                {{#unless name}}
-                <a href="/login">
+            <form style="display:flex;align-items:center;justify-content:center" class="form-inline" action="/logout" name="logout" method="post">
+                <h4 style="margin-right:15px">Welcome to {{greeting}}</h4> {{#unless name}}
+                <a href="/login" style="margin-right:15px">
                     <button id="login-button" type="button" class="btn btn-primary">LOG IN</button>
                 </a>
                 {{/unless}} {{#unless name}}
@@ -14,31 +14,40 @@
                     <button id="register-button" type="button" class="btn btn-info">REGISTER</button>
                 </a>
                 {{/unless}} {{#if name}}
-                <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
+                <button style="font-size:10px" id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
                 {{/if}}
             </form>
         </div>
-        <br> {{#if name}}
-        <div class="row text-center">
-{{!--             <form class="form-inline" action="/postPing" name="postPing" method="post">
- --}}                <button id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
-{{!--             </form>
- --}}            <h1 id="pingLog"></h1>
-            <div id="pingDiv" style="height:300px;overflow: hidden">
-
+    </div>
+    <br> {{#if name}}
+    <div class="row text-center">
+        <div style="display: flex;align-items:center;justify-content:center;spacemargin-bottom:20px">
+            <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
+                <button id="getMap-btn" type="submit" class="btn btn-primary">VIEW MAP</button>
+            </form>
+            <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
+            <form class="" action="/profile/{{userId}}" name="getBox" method="get">
+                <button id="getBox-btn" type="submit" class="btn btn-info">PROFILE</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row text-center ">
+        <div class="col-xs-12 col-sm-6 col-md-6" style="border:solid black 1px;height:350px;max-height:400px;overflow: scroll; margin: 0 auto">
+            <h3>Signal Log</h3>
+            <hr>
+            <div id="pingLog">
             </div>
         </div>
-        {{/if}}
+        <div class="col-xs-12 col-sm-6 col-md-6" style="border:solid black 1px;height:350px;max-height:400px;overflow: scroll; margin: 0 auto">
+            <h3>Active Signals</h3>
+            <hr>
+            <div id="activeLog" style="display:flex;flex-direction:column">
+            </div>
+        </div>
     </div>
-</body>
+    {{/if}}
+</div>
 {{!-- client side scripts --}}
-<script>
-var socket = io();
-socket.on('testing', function(msg) {
-    // $("#pingLog").text(msg);
-    $("body").effect("shake");
-    $( "<h3>"+msg+"</h3>" ).prependTo( "#pingDiv" );
-    console.log(msg);
-});
-</script>
-<script src="/js/welcome.js"></script>
+<script src="/js/clientSocket.js"></script>
+<script src="/js/index.js"></script>
