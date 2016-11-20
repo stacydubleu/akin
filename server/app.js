@@ -45,9 +45,7 @@ MongoClient.connect("mongodb://" + mdbuser + ":" + mdbpw + "@ds031965.mlab.com:3
     db = database;
 });
 
-
-
-// Expose our db and io to our router
+// Expose our db and socket.io to our router
 app.use(function(req, res, next) {
     req.db = db;
     req.io = io;
@@ -55,7 +53,6 @@ app.use(function(req, res, next) {
     req.myParisite = { 'left': 'right' };
     next();
 });
-
 
 //favicon is not loading
 app.use(favicon(path.join('./public/images/favicon.ico')));
