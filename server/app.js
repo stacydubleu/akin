@@ -59,7 +59,7 @@ app.use(favicon(path.join('./public/images/favicon.ico')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
 
 //declare public folder as static
 // __dirname - native Node variable contain file path of current folder
