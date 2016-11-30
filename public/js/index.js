@@ -17,7 +17,7 @@
              for (var i = 0; i < activeUrl.length; i++) {
                  var tempName = activeUrl[i].userName;
                  var tempId = activeUrl[i].userId;
-                 var linkId = tempId.substr(-22);
+                 var linkId = /[^/]*$/.exec(tempId)[0];
                  $("<a style='font-size:20px' href='/profile/" + linkId + "'>" + tempName + "</a>").appendTo("#activeLog");
              }
          });
