@@ -23,6 +23,20 @@
          });
      }
 
+     $("#locationSubmit-btn").click(function() {
+         var userLocation = $('#searchTextField').val();
+         var userId = $('#userId').text();
+
+         if (location) {
+             $.post("/postLocation", { userLocation: userLocation, userId: userId }, function(data) {
+                 console.log(data);
+                 window.location.replace('/');
+             });
+         } else {
+             alert('invalid or empty location!');
+         }
+     });
+
      $("#postPing-btn").click(function() {
          $.post("/postPing", function(data) {
              var userName = data.userName;
