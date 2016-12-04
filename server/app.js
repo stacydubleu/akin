@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var stormpath = require('express-stormpath');
 var socketIO = require('socket.io');
+var crypto = require('crypto');
 
 //for secret keys and passwords
 var dotenv = require('dotenv');
@@ -59,7 +60,8 @@ app.use(favicon(path.join('./public/images/favicon.ico')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
+app.use(cookieParser(''+crypto.randomBytes(64)+'')); 
 
 //declare public folder as static
 // __dirname - native Node variable contain file path of current folder

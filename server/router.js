@@ -17,7 +17,9 @@ router.post('/postPing', stormpath.loginRequired, pingController.postPing);
 router.delete('/deleteSignal', stormpath.loginRequired, pingController.deleteSignal);
 
 //profile routes	
-router.get('/profile/:userId', profileController.getProfile);
+router.get('/profile/:userId', stormpath.loginRequired, profileController.getProfile);
+router.post('/postLocation', profileController.postLocation);
+
 
 //get active pings
 router.get('/getActive', stormpath.loginRequired, pingController.getActive);

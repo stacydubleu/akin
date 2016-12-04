@@ -22,13 +22,10 @@ module.exports.deleteSignal = function(request, response) {
 module.exports.getActive = function(request, response) {
 
     request.db.collection('users').find({ "signal": "active" }).toArray(function(err, result) {
-        // console.log(result);
-        // console.log(result[0].userName);
         if (err) throw err;
         else {
             response.send(result);
         }
-
     });
 };
 
