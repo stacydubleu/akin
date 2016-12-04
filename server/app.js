@@ -1,3 +1,4 @@
+var dotenv = require('dotenv').load();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,10 +9,6 @@ var hbs = require('hbs');
 var stormpath = require('express-stormpath');
 var socketIO = require('socket.io');
 var crypto = require('crypto');
-
-//for secret keys and passwords
-var dotenv = require('dotenv');
-dotenv.load();
 
 var port = process.env.EXPRESS_PORT || 1111;
 
