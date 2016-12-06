@@ -26,5 +26,8 @@ router.get('/getActive', stormpath.loginRequired, pingController.getActive);
 
 //map controller routes
 router.get('/getMap', stormpath.loginRequired, mapController.getMap);
+router.get('/getMarkers', stormpath.loginRequired, mapController.getMarkers);
+router.get('/googleGeocode', stormpath.loginRequired, mapController.googleGeocode);
+
 
 module.exports = router;
