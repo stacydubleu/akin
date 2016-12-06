@@ -30,6 +30,7 @@
          if (userLocation) {
              // $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + userLocation + '&key=AIzaSyDWmhY4red18b-S6aVSQsbO3BYL8tL6fkY',
              $.get('/googleGeocode', { userLocation: userLocation }).done(function(response) {
+
                  if (response.status === "OVER_QUERY_LIMIT") {
                      alert('over query limit');
                  }
