@@ -1,0 +1,26 @@
+<h1>
+	Send ping {{name}}
+</h1>
+<button id="postPing-btn" type="button" class="btn btn-success">
+	POST PING
+</button>
+<div id="pingDiv" style="height:300px;overflow: hidden"></div>
+
+{{!-- client side scripts --}}
+<script>
+var socket = io();
+
+socket.on('self', function(msg){
+	$("<h2>"+msg+"</h2>").prependTo('#pingDiv');
+	console.log(msg);
+});
+socket.on('testing', function(msg) {
+    // $("#pingLog").text(msg);
+    $("body").effect("shake");
+    $( "<h3>"+msg+"</h3>" ).prependTo( "#pingDiv" );
+    console.log(msg);
+});
+
+</script>
+
+<script src="/js/welcome.js"></script>

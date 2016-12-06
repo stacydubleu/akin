@@ -4,11 +4,13 @@
     <p id="userId" style="display:none">{{userId}}</p>
     <div class="row text-center">
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <h1 style="font-size:60px">HELLO {{name}}</h1>
-            <form style="display:flex;align-items:center;justify-content:center" class="form-inline" action="/logout" name="logout" method="post">
-                <h4 style="margin-right:15px">Welcome to {{greeting}}</h4> {{#unless name}}
+            {{#if name}} <h1 style="font-size:60px">HELLO {{name}}</h1> {{/if}}
+            <form style="display:block; float: center;" class="form" action="/logout" name="logout" method="post">
+                <h4 style="margin: 10px 0; display: block;">Welcome to {{#if name}}{{greeting}}{{/if}}</h4> 
+                {{#unless name}}<h1 id='title' style="margin: 0 0 15px 0; font-size: 15em; opacity: 0.9">{{greeting}}</h1>{{/unless}}
+                {{#unless name}}
                 <a href="/login" style="margin-right:15px">
-                    <button id="login-button" type="button" class="btn btn-primary">LOG IN</button>
+                    <button id="login-button" type="button" class="btn btn-primary" onClick="changeBackground()">LOG IN</button>
                 </a>
                 {{/unless}} {{#unless name}}
                 <a href="/register">
@@ -21,45 +23,96 @@
         </div>
     </div>
     {{#if name}}
-    <br> {{#if location}}
-    <div class="row text-center showOnLocation">
-        <div style="display: flex;align-items:center;justify-content:center;spacemargin-bottom:20px">
-            <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
-                <button id="getMap-btn" type="submit" class="btn btn-primary">VIEW MAP</button>
-            </form>
-            <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
-            <form class="" action="/profile/{{userId}}" name="getBox" method="get">
-                <button id="getBox-btn" type="submit" class="btn btn-info">PROFILE</button>
-            </form>
-        </div>
-    </div>
-    <br>
-    <div class="row text-center showOnLocation">
-        <div class="col-xs-12 col-sm-6 col-md-6" style="border:solid black 1px;height:350px;max-height:400px;overflow: scroll; margin: 0 auto">
-            <h3>Signal Log</h3>
-            <hr>
-            <div id="pingLog">
+        <br> {{#if location}}
+        <div class="row text-center showOnLocation">
+            <div style="display: flex;align-items:center;justify-content:center;spacemargin-bottom:20px">
+                <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
+                    <button id="getMap-btn" type="submit" class="btn btn-primary">VIEW MAP</button>
+                </form>
+                <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
+                <form class="" action="/profile/{{userId}}" name="getBox" method="get">
+                    <button id="getBox-btn" type="submit" class="btn btn-info">PROFILE</button>
+                </form>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6" style="border:solid black 1px;height:350px;max-height:400px;overflow: scroll; margin: 0 auto">
-            <h3>Active Signals</h3>
-            <hr>
-            <div id="activeLog" style="display:flex;flex-direction:column">
+        <br>
+        <div class="row text-center showOnLocation">
+            <div class="col-xs-12 col-sm-6 col-md-6" style="border:solid black 1px;height:350px;max-height:400px;overflow: scroll; margin: 0 auto">
+                <h3>Signal Log</h3>
+                <hr>
+                <div id="pingLog">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6" style="border:solid black 1px;height:350px;max-height:400px;overflow: scroll; margin: 0 auto">
+                <h3>Active Signals</h3>
+                <hr>
+                <div id="activeLog" style="display:flex;flex-direction:column">
+                </div>
             </div>
         </div>
-    </div>
     {{else}}
-    <div class="form-group hideOnLocation" style="max-width:620px;margin:0 auto">
-        <label for="searchTextField">Where are you from?</label>
-        <div style="display:flex;justify-content:center">
-            <input style="margin-right:10px" type="text" class="form-control" id="searchTextField" placeholder="Enter Location">
-            <button type="submit" id="locationSubmit-btn" class="btn btn-primary">Submit</button>
+        <div class="form-group hideOnLocation" style="max-width:620px;margin:0 auto">
+            <label for="searchTextField">Where are you from?</label>
+            <div style="display:flex;justify-content:center">
+                <input style="margin-right:10px" type="text" class="form-control" id="searchTextField" placeholder="Enter Location">
+                <button type="submit" id="locationSubmit-btn" class="btn btn-primary">Submit</button>
+            </div>
+            <small id="emailHelp" class="form-text text-muted">Be as general or as specific as you want to be.</small>
         </div>
-        <small id="emailHelp" class="form-text text-muted">Be as general or as specific as you want to be.</small>
-    </div>
     {{/if}} {{/if}}
 </div>
 {{!-- client side scripts --}}
+{{#unless name}}
+<script src="/js/jquery.ripples.js"></script>
+<script>
+$(document).ready(function() {
+    try {
+        $('body').ripples({
+            resolution: 512,
+            dropRadius: 20, //px
+            perturbance: 0.04,
+        });
+        $('main').ripples({
+            resolution: 300,
+            dropRadius: 20, //px
+            perturbance: 0.04,
+            interactive: false
+        });
+    }
+    catch (e) {
+        $('.error').show().text(e);
+    }
+
+    $('.js-ripples-disable').on('click', function() {
+        $('body, main').ripples('destroy');
+        $(this).hide();
+    });
+
+    $('.js-ripples-play').on('click', function() {
+        $('body, main').ripples('play');
+    });
+
+    $('.js-ripples-pause').on('click', function() {
+        $('body, main').ripples('pause');
+    });
+
+    // Automatic drops
+    setInterval(function() {
+        var $el = $('main');
+        var x = Math.random() * $el.outerWidth();
+        var y = Math.random() * $el.outerHeight();
+        var dropRadius = 20;
+        var strength = 0.04 + Math.random() * 0.04;
+
+        $el.ripples('drop', x, y, dropRadius, strength);
+    }, 400);
+});
+</script>
+{{/unless}}
+
+
+{{#if name}} 
+<script src="/js/index.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script>
 function initializeLocInput() {
@@ -72,4 +125,11 @@ function initializeLocInput() {
 google.maps.event.addDomListener(window, 'load', initializeLocInput);
 </script>
 <script src="/js/clientSocket.js"></script>
-<script src="/js/index.js"></script>
+<script>
+(function(){
+    document.body.style.background ='#137aa0';
+})();
+$('body, main').ripples('pause');
+$('body, main').ripples('destroy');
+</script>
+{{/if}}

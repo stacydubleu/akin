@@ -52,7 +52,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-//favicon is not loading
+//favicon is loading
 app.use(favicon(path.join('./public/images/favicon.ico')));
 
 app.use(bodyParser.json());
@@ -61,9 +61,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser(''+crypto.randomBytes(64)+'')); 
 
 //declare public folder as static
-// __dirname - native Node variable contain file path of current folder
-// second param is name of static resource folder
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('./public'));
 
 // view engine setup
