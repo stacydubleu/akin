@@ -15,8 +15,8 @@ module.exports.getMarkers = function(request, response) {
 
 module.exports.googleGeocode = function(req, response) {
 
-    var geoUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + userLocation + '&key=' + req.dotenv.GOOGLE_KEY;
     var userLocation = req.query.userLocation;
+    var geoUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + userLocation + '&key=' + req.dotenv.GOOGLE_KEY;
 
     request(geoUrl, function(err, res, body) {
         if (err) {

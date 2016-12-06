@@ -62,7 +62,6 @@
     {{/if}} {{/if}}
 </div>
 {{!-- client side scripts --}}
-{{#unless name}}
 <script src="/js/jquery.ripples.js"></script>
 <script>
 $(document).ready(function() {
@@ -108,10 +107,6 @@ $(document).ready(function() {
     }, 400);
 });
 </script>
-{{/unless}}
-
-
-{{#if name}} 
 <script src="/js/index.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script>
@@ -132,4 +127,3 @@ google.maps.event.addDomListener(window, 'load', initializeLocInput);
 $('body, main').ripples('pause');
 $('body, main').ripples('destroy');
 </script>
-{{/if}}

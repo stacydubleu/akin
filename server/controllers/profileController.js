@@ -14,6 +14,7 @@ module.exports.postLocation = function(request, response) {
     var userLat = request.body.userLat;
     var userLong = request.body.userLong;
     userLocation = request.body.userLocation;
+    
     userHref = "https://api.stormpath.com/v1/accounts/" + request.body.userId;
 
     request.db.collection('users').update({ "userId": userHref }, {
