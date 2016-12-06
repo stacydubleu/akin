@@ -22,10 +22,21 @@ $(function() {
             }
         },
         onMarkerClick: function(event, index) {
-            console.log(index);
-            console.log('marker clicked');
-        }
 
+            var userHref = mapMarkers[index].userId;
+            var userName = mapMarkers[index].name;
+
+            $.ajax({
+                url: '/deleteSignal',
+                method: 'DELETE',
+                dataType: 'json',
+                data: { userHref: userHref },
+                success: function() {
+                    getMarkers();
+                    alert('Cleared signal for ' + userName);
+                }
+            });
+        }
     });
 
     //function to get active signals and mark map
@@ -36,7 +47,7 @@ $(function() {
 });
 
 function getMarkers() {
-    
+
     mapObj.removeAllMarkers();
     mapMarkers.length = 0;
 
@@ -45,7 +56,7 @@ function getMarkers() {
             mapMarkers.push({
                 name: data[i].userName + ' @ ' + data[i].userLocation,
                 latLng: [data[i].userLat, data[i].userLong],
-                userId: data[i].status
+                userId: data[i].userId
             });
         }
         mapObj.addMarkers(mapMarkers, []);
