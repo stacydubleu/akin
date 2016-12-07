@@ -16,57 +16,54 @@
     <link rel="stylesheet" href="/stylesheets/layout.css">
 </head>
 <nav>
-    {{#if name}}
-        {{#if location}}
-            <div id="nav" class="row text-center showOnLocation">
-                <table id="nav-split">
-                    <tr>
-                        <td>
-                            <div id="nav-greet">
-                                <div id="nav-hello">HELLO {{name}}
-                                    <span id="nav-wel">Welcome to {{greeting}}</span>
-                                </div>
-                       
-                            </div>
-                        </td>
-                        <td>
-                            <table id="nav-links">
-                                <tr>
-                                    <td class="split">
-                                        <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
-                                            <button id="getMap-btn" type="submit" class="btn btn-primary">VIEW MAP</button>
-                                        </form>
-                                    </td>
-                                    <td class="split">
-                                        <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
-                                    </td>
-                                    <td>    
-                                        <form style="margin-right:15px" class="" action="/profile/{{userId}}" name="getBox" method="get">
-                                            <button id="navGetBox-btn" type="submit" class="btn btn-info">PROFILE</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form class="" action="/logout" name="logout" method="post">
-                                            <button id="navLogout-btn" type="submit" class="btn btn-danger">LOG OUT</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        {{else}}
-            <h1 id="location-hello">HELLO {{name}}</h1> 
-            <h4 id="location-welcome">Welcome to {{greeting}}</h4> 
-            <form style="display:block; float: center;" class="form" action="/logout" name="logout" method="post">
-                <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
-            </form>
-        {{/if}}
-    {{/if}}
+    {{#if name}} {{#if location}}
+    <div id="nav" class="row text-center showOnLocation">
+        <table id="nav-split">
+            <tr>
+                <td>
+                    <div id="nav-greet">
+                        <div id="nav-hello">HELLO {{name}}
+                            <span id="nav-wel">Welcome to {{greeting}}</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <table id="nav-links">
+                        <tr>
+                            <td class="split">
+                                <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
+                                    <button id="getMap-btn" type="submit" class="btn btn-primary">VIEW MAP</button>
+                                </form>
+                            </td>
+                            <td class="split">
+                                <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
+                            </td>
+                            <td>
+                                <form style="margin-right:15px" class="" action="/profile/{{userId}}" name="getBox" method="get">
+                                    <button id="navGetBox-btn" type="submit" class="btn btn-info">PROFILE</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form class="" action="/logout" name="logout" method="post">
+                                    <button id="navLogout-btn" type="submit" class="btn btn-danger">LOG OUT</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    {{else}}
+    <h1 id="location-hello">HELLO {{name}}</h1>
+    <form style="display:block; float: center;" class="form" action="/logout" name="logout" method="post">
+        <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
+    </form>
+    {{/if}} {{/if}}
 </nav>
 
 <body>
     {{{body}}}
 </body>
+
 </html>
