@@ -3,7 +3,6 @@ html {}
 body {
 	background: #1e79c1;
 	background: linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4);
-    padding: 40px;
     font: 14px Helvetica, Arial, sans-serif;
     color: #ffffff;
     height: 100vh;
@@ -12,3 +11,147 @@ body {
 a {
     color: #ffffff;
 }
+
+#akin-intro{
+	margin: 0 0 15px 0; 
+	font-size: 25rem; 
+	opacity: 0.8;
+	-webkit-animation: fadein 6s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 6s; /* Firefox < 16 */
+    -ms-animation: fadein 6s; /* Internet Explorer */
+    -o-animation: fadein 6s; /* Opera < 12.1 */
+    animation: fadein 6s;
+}
+
+#welcome{
+	font-size: 2.25rem;
+	opacity: 0.8;
+	margin: 6% 0 10px 0; 
+	display: block;
+	-webkit-animation: fadein 3s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 3s; /* Firefox < 16 */
+    -ms-animation: fadein 3s; /* Internet Explorer */
+    -o-animation: fadein 3s; /* Opera < 12.1 */
+    animation: fadein 3s;
+}
+
+#location-hello{
+	font-size: 5rem;
+}
+
+#location-welcome{
+	font-size: 2.5rem;
+	margin: 10px 0; 
+	display: block;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 0.8; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 0.8; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 0.8; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 0.8; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 0.8; }
+}
+
+canvas{
+	z-index: 8;
+}
+
+#login-button, #register-button{
+	background: none;
+	font-size: 2rem;
+	opacity: 0.8;
+	margin: 3px 3px;
+	border: 2px solid transparent;
+    border-radius: 4px;
+    -webkit-animation: fadein 6s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 6s; /* Firefox < 16 */
+    -ms-animation: fadein 6s; /* Internet Explorer */
+    -o-animation: fadein 6s; /* Opera < 12.1 */
+    animation: fadein 6s;
+    z-index: 10;
+}
+
+#login-button:hover, #login-button:active, #register-button:hover, #register-button:active,{
+	background-color:rgba(255, 255, 255, 0.25)
+}
+
+#logout-button{
+	c
+}
+
+#logout-button:active, #logout-button:hover{
+	background-color:rgba(255, 255, 255, 0.25)
+}
+
+#geo-submission{
+	max-width:620px;
+	margin: 5% auto;
+}
+
+#geo-submission label{
+	font-weight: normal;
+	font-size: 2.5rem;
+	text-align: center;
+	margin: 1% auto;
+}
+
+#geo-submission #searchTextField{
+	background-color: rgba(255, 255, 255, 0.5);
+	border: 2px #2aaada solid;
+    border-radius: 4px;
+    font-size: 1.75rem;
+    color: #ffffff;
+}
+
+#geo-submission #searchTextField::-webkit-input-placeholder{
+	color: #ffffff;
+}
+#geo-submission #searchTextField::-moz-placeholder{
+	color: #ffffff;
+}
+#geo-submission #searchTextField::-ms-input-placeholder{
+	color: #ffffff;
+}
+
+#geo-submission #locationSubmit-btn{
+	color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.2);
+	border: 2px #2aaada solid;
+    border-radius: 4px;
+}
+
+#geo-submission #locationSubmit-btn:hover, #geo-submission #locationSubmit-btn:active{
+	background-color:rgba(255, 255, 255, 0.5)
+}
+
+
+
+
+
+
+
+
+
+
