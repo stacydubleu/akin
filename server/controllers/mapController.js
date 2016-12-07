@@ -2,14 +2,14 @@ var path = require('path');
 var http = require('http');
 var request = require('request');
 
-module.exports.getMap = function(request, response) {
-    var name = (request.user.givenName).toUpperCase();
-    response.render('map', { name: name });
+module.exports.getMap = function(req, res) {
+    var name = (req.user.givenName).toUpperCase();
+    res.render('map', { name: name });
 };
 
-module.exports.getMarkers = function(request, response) {
-    request.db.collection('users').find({ "signal": "active" }).toArray(function(err, data) {
-        response.send(data);
+module.exports.getMarkers = function(req, res) {
+    req.db.collection('users').find({ "signal": "active" }).toArray(function(err, data) {
+        res.send(data);
     });
 };
 
