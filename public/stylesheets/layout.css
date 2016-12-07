@@ -1,0 +1,62 @@
+nav{
+	width: 100vw;
+}
+
+#nav{ 
+	margin: 0 auto;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+tbody{
+	width: 100%;
+}
+
+#nav-split{
+	display: flex;
+	width: 100%;
+  	border-collapse: collapse;
+}
+
+.split{
+	width: 50%;
+}
+
+#nav-greet{
+	margin: 10px 15px;
+	width: 50vw;
+	padding: 0 0 0 8%;
+	text-align: left;
+} 
+
+#nav-hello{
+	font-size: 2rem;
+}
+
+#nav-wel{
+	font-size: 1.5rem;
+	padding-left: 1%;
+}
+
+#nav-links{
+	display: flex;
+	width: 50vh;
+  	table-layout: fixed;
+  	border-collapse: collapse;
+}
+
+#nav-links button{
+	background: none;
+	font-size: 1.5rem;
+	margin: 3px 10px;
+	border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+#nav-links button:hover{
+	background: rgba(255, 255, 255, 0.2);
+}
+
+#nav-links button:active{
+	background: rgba(255, 255, 255, 0.5);
+}

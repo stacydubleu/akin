@@ -3,7 +3,6 @@ html {}
 body {
 	background: #1e79c1;
 	background: linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4);
-    padding: 40px;
     font: 14px Helvetica, Arial, sans-serif;
     color: #ffffff;
     height: 100vh;
@@ -36,8 +35,14 @@ a {
     animation: fadein 3s;
 }
 
-#welcomed{
-	font-size: 3rem;
+#location-hello{
+	font-size: 5rem;
+}
+
+#location-welcome{
+	font-size: 2.5rem;
+	margin: 10px 0; 
+	display: block;
 }
 
 @keyframes fadein {
@@ -139,24 +144,6 @@ canvas{
 
 #geo-submission #locationSubmit-btn:hover, #geo-submission #locationSubmit-btn:active{
 	background-color:rgba(255, 255, 255, 0.5)
-}
-
-#nav{
-	display: flex;
-	align-items:center;
-	justify-content:center;
-	margin-bottom:20px;	
-	width: 100%;
-  	table-layout: fixed;
-  	border-collapse: collapse;
-}
-
-#nav button{
-	background: none;
-	font-size: 1.5rem;
-	margin: 3px 3px;
-	border: 2px solid transparent;
-    border-radius: 4px;
 }
 
 
