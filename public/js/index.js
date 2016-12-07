@@ -27,15 +27,30 @@
          var userLocation = $('#searchTextField').val();
          var userId = $('#userId').text();
 
-         if (location) {
-             $.post("/postLocation", { userLocation: userLocation, userId: userId }, function(data) {
-                 console.log(data);
-                 window.location.replace('/');
+         if (userLocation) {
+             // $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + userLocation + '&key=AIzaSyDWmhY4red18b-S6aVSQsbO3BYL8tL6fkY',
+             $.get('/googleGeocode', { userLocation: userLocation }).done(function(response) {
+
+                 if (response.status === "OVER_QUERY_LIMIT") {
+                     alert('over query limit');
+                 }
+                 if (response.status === "OK") {
+                     var latLong = response.results[0].geometry.location;
+                     postLocation(userLocation, latLong, userId);
+                 } else {
+                     alert('invalid or empty location!');
+                 }
              });
          } else {
              alert('invalid or empty location!');
          }
      });
+
+     function postLocation(userLocation, latLong, userId) {
+         $.post("/postLocation", { userLocation: userLocation, userLat: latLong.lat, userLong: latLong.lng, userId: userId }, function(data) {
+             window.location.replace('/');
+         });
+     }
 
      $("#postPing-btn").click(function() {
          $.post("/postPing", function(data) {

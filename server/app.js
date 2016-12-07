@@ -47,6 +47,7 @@ MongoClient.connect("mongodb://" + mdbuser + ":" + mdbpw + "@ds031965.mlab.com:3
 app.use(function(req, res, next) {
     req.db = db;
     req.io = io;
+    req.dotenv = dotenv;
     req.app_setting_port = port;
     req.myParisite = { 'left': 'right' };
     next();
