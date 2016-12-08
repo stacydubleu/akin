@@ -1,17 +1,5 @@
 html {}
 
-body {
-	background: #1e79c1;
-	background: linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4);
-    font: 14px Helvetica, Arial, sans-serif;
-    color: #ffffff;
-    height: 100vh;
-}
-
-a {
-    color: #ffffff;
-}
-
 #akin-intro{
 	margin: 0 0 15px 0; 
 	font-size: 25rem; 
