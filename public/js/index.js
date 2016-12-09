@@ -1,6 +1,23 @@
  $(document).ready(function() {
 
-     refresh();
+    var navHeight = document.querySelector('#nav-split').offsetHeight;
+    console.log(navHeight);
+    document.querySelector(".container").style.paddingTop = navHeight+"px";
+    
+    $(document).ready(function() {
+        try {
+            var screen = $('body');
+            screen.ripples({
+                resolution: 512,
+                dropRadius: 20, //px
+                perturbance: 0.04,
+            });
+        } catch (e) {
+            $('.error').show().text(e);
+        }
+    });
+
+    refresh();
 
      //call refresh every 1.5 seconds
      window.setInterval(refresh, 1500);
