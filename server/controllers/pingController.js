@@ -30,7 +30,7 @@ module.exports.getActive = function(request, response) {
 };
 
 module.exports.postPing = function(request, response) {
-    // console.log(request.user.givenName + ' sent a ping');
+    console.log(request.user.givenName + ' sent a ping');
 
     var io = request.io;
     var userId = request.user.href;
