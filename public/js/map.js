@@ -1,15 +1,33 @@
 var mapMarkers = [];
 
 $(function() {
+
+    // class="jvectormap-marker jvectormap-element"
+
+    $(".postPing-btn").click(function() {
+        $.post("/postPing", function(data) {
+            var userName = data.userName;
+        });
+    });
+
+    $("#getMap-btn").click(function() {
+        $.get("/getMap");
+    });
+
     mapObj = new jvm.Map({
         container: $('#world-map'),
         map: 'world_mill',
         backgroundColor: '#66b3ff',
-        markersSelectable: true,
+        markersSelectable: false,
         markerStyle: {
             initial: {
-                fill: '#F8E23B',
+                fill: '#ff8080',
                 stroke: '#383f47'
+            },
+            hover: {
+                stroke: 'black',
+                "stroke-width": 2,
+                cursor: 'pointer'
             }
         },
         regionStyle: {
@@ -22,7 +40,6 @@ $(function() {
             }
         },
         onMarkerClick: function(event, index) {
-
             var userHref = mapMarkers[index].userId;
             var userName = mapMarkers[index].name;
 
@@ -42,16 +59,16 @@ $(function() {
     //function to get active signals and mark map
     getMarkers();
 
-    //call refresh every 3 seconds to get new signal markers on map
-    window.setInterval(getMarkers, 3000);
+    //call refresh every 2.5 seconds to get new signal markers on map
+    window.setInterval(getMarkers, 2500);
 });
 
 function getMarkers() {
 
-    mapObj.removeAllMarkers();
-    mapMarkers.length = 0;
-
     $.get("/getMarkers", function(data) {
+        mapObj.removeAllMarkers();
+        mapMarkers.length = 0;
+
         for (var i = 0; i < data.length; i++) {
             mapMarkers.push({
                 name: data[i].userName + ' @ ' + data[i].userLocation,

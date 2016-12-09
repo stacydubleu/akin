@@ -1,23 +1,28 @@
  $(document).ready(function() {
 
-    var navHeight = document.querySelector('#nav-split').offsetHeight;
-    console.log(navHeight);
-    document.querySelector(".container").style.paddingTop = navHeight+"px";
-    
-    $(document).ready(function() {
-        try {
-            var screen = $('body');
-            screen.ripples({
-                resolution: 512,
-                dropRadius: 20, //px
-                perturbance: 0.04,
-            });
-        } catch (e) {
-            $('.error').show().text(e);
-        }
-    });
+     try {
+         var navHeight = document.querySelector('#nav-split').offsetHeight;
+     } catch (e) {
+         console.log('no nav split offset found');
+     }
+     console.log(navHeight);
 
-    refresh();
+     document.querySelector(".container").style.paddingTop = navHeight + "px";
+
+     $(document).ready(function() {
+         try {
+             var screen = $('body');
+             screen.ripples({
+                 resolution: 512,
+                 dropRadius: 20, //px
+                 perturbance: 0.04,
+             });
+         } catch (e) {
+             $('.error').show().text(e);
+         }
+     });
+
+     refresh();
 
      //call refresh every 1.5 seconds
      window.setInterval(refresh, 1500);
@@ -45,13 +50,11 @@
          var userId = $('#userId').text();
 
          if (userLocation) {
-             // $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + userLocation + '&key=AIzaSyDWmhY4red18b-S6aVSQsbO3BYL8tL6fkY',
              $.get('/googleGeocode', { userLocation: userLocation }).done(function(response) {
 
                  if (response.status === "OVER_QUERY_LIMIT") {
                      alert('over query limit');
-                 }
-                 if (response.status === "OK") {
+                 } else if (response.status === "OK") {
                      var latLong = response.results[0].geometry.location;
                      postLocation(userLocation, latLong, userId);
                  } else {
@@ -69,7 +72,7 @@
          });
      }
 
-     $("#postPing-btn").click(function() {
+     $(".postPing-btn").click(function() {
          $.post("/postPing", function(data) {
              var userName = data.userName;
              refresh();

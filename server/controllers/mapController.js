@@ -4,7 +4,9 @@ var request = require('request');
 
 module.exports.getMap = function(req, res) {
     var name = (req.user.givenName).toUpperCase();
-    res.render('map', { name: name });
+    var userId = req.user.href;
+    var linkId = /[^/]*$/.exec(userId)[0];
+    res.render('map', { name: name, location: 'null', userId: linkId });
 };
 
 module.exports.getMarkers = function(req, res) {
