@@ -14,30 +14,46 @@
     <script src="/js/bootstrap.js"></script>
     <script src="/js/socket.io.js"></script>
     <link rel="stylesheet" href="/stylesheets/layout.css">
+    <script>
+    function toggleNav() {
+        var x = document.getElementById("nav-smallview");
+
+        if (x.className != "expanded") {
+            x.style.display = "block";
+            x.className = "expanded";
+        } else {
+            x.style.display = "none";
+            x.className = "compressed";
+        }
+    }
+    </script>
 </head>
 <nav>
     {{#if name}}
         {{#if location}}
-            <div id="nav" class="row text-center showOnLocation">
+            <div class="row text-center" id="nav">
                 <table id="nav-split">
                     <tr>
                         <td>
                             <div id="nav-greet">
                                 <div id="nav-hello">HELLO {{name}}
-                                    <span id="nav-wel">Welcome to <a href="/" id="home">AKIN</a></span>
+                                    <span id="nav-wel">Welcome to <a href="/" id="nav-home">AKIN</a></span>
                                 </div>
                        
                             </div>
                         </td>
-                        <td>
+                        <td id="drop-down">
+                            <a href="javascript:void(0);" onclick="toggleNav()">☰</a>
+                        </td>
+                        <td id="nav-largeview">
                             <table id="nav-links">
                                 <tr>
-                                    <td class="split">
+                                    <td style="width: 45vw">
                                         <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
                                             <button id="getMap-btn" type="submit" class="btn btn-primary">VIEW MAP</button>
                                         </form>
                                     </td>
-                                    <td class="split">
+                                    <td>
                                         <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
                                     </td>
                                     <td>    
@@ -55,13 +71,35 @@
                         </td>
                     </tr>
                 </table>
+                <ul id="nav-smallview" class="compressed">
+                    <li>
+                        <form style="margin-right:15px" class="" action="/getMap" name="getMap" method="get">
+                            <button id="getMap-btn" type="submit" class="btn btn-primary">VIEW MAP</button>
+                        </form>
+                    </li>
+                    <li>
+                        <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success">SEND PING</button>
+                    </li>
+                    <li>
+                        <form style="margin-right:15px" class="" action="/profile/{{userId}}" name="getBox" method="get">
+                            <button id="navGetBox-btn" type="submit" class="btn btn-info">PROFILE</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form class="" action="/logout" name="logout" method="post">
+                            <button id="navLogout-btn" type="submit" class="btn btn-danger">LOG OUT</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         {{else}}
-            <h1 id="location-hello">HELLO {{name}}</h1> 
-            <h4 id="location-welcome">Welcome to {{greeting}}</h4> 
-            <form style="display:block; float: center;" class="form" action="/logout" name="logout" method="post">
-                <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
-            </form>
+            <div id="location-nav">
+                <h1 id="location-hello">HELLO {{name}}</h1> 
+                <h4 id="location-welcome">Welcome to {{greeting}}</h4> 
+                <form style="display:block; float: center;" class="form" action="/logout" name="logout" method="post">
+                    <button id="logout-button" type="submit" class="btn btn-danger">LOG OUT</button>
+                </form>
+            </div>
         {{/if}}
     {{/if}}
 </nav>
@@ -69,4 +107,5 @@
 <body>
     {{{body}}}
 </body>
+
 </html>
