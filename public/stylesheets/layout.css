@@ -8,6 +8,7 @@ body {
     background: #1e79c1;
     background: linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4);
     font: 14px Helvetica, Arial, sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     color: #ffffff;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -123,6 +124,7 @@ tbody {
     display: flex;
     table-layout: fixed;
     border-collapse: collapse;
+    padding-right: 20px;
 }
 
 #nav-links button {

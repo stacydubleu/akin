@@ -1,14 +1,18 @@
 <link rel="stylesheet" href="/stylesheets/profile.css" type="text/css" media="screen" />
 <div class="container">
-	<h1> HI {{userName}} </h1>
-	{{#if ownProfile}}
-	<h3 style="color:blue">This is your own profile page! We know because ownProfile variable is true.</h3>
-	{{/if}}
-	<h3 style="color:blue">*Do some customizations here when the owner of the profile views it, allow self modifications to information and arranging of items*</h3>
-	<h2>Location: {{userLocation}}</h2>
-	<h2 id="userHref" class="hidden">{{userHref}}</h2>
-	<h2 id="signalStatus" style="color:{{signalColor}}">Current Signal Status: {{signal}}</h2>
-	<button id="clearButton" type="button" class="btn btn-primary">CLEAR SIGNAL</button>
+	<div id="basic-profile">
+		<div id="profile-image"></div>
+		<div id="profile-info">
+			<h1 id="userName"> {{userName}} </h1>
+			{{#if ownProfile}}
+			<h3 style="color:blue">This is your own profile page! We know because ownProfile variable is true.</h3>
+			{{/if}}
+			<h3 id="location">Location: {{userLocation}}</h2>
+			<h3 id="userHref" class="hidden">{{userHref}}</h2>
+			<h3 id="signalStatus" style="color:{{signalColor}}">Current Signal Status: {{signal}}</h2>
+			<button id="clearButton" type="button" class="btn btn-primary">CLEAR SIGNAL</button>
+		</div>
+	</div>
 	<br>
 	<br>
 	<a href="/" style="font-size:32px">GO HOME</a>
@@ -25,5 +29,6 @@
 	<h4>Option 1: Give Random Happy Sticker</h4>
 	<h4>Option 2: Give Random Music Note</h4>
 	<h4>Option 3: Give Random *Relevant Motivation Quote</h4>
+	<br><br>
 	<script src="/js/profile.js"></script>
 </div>
