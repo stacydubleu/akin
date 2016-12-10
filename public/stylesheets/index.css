@@ -1,6 +1,8 @@
 #akin-intro{
 	margin: 0 0 15px 0; 
-	font-size: 17rem; 
+	font-size: 17rem;
+	font-family: 'Open Sans Condensed', 'san-serif';
+	font-weight: bold; 
 	opacity: 0.8;
 	-webkit-animation: fadein 6s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 6s; /* Firefox < 16 */
