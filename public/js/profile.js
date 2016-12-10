@@ -1,5 +1,13 @@
  $(document).ready(function() {
 
+     try {
+         var navHeight = document.querySelector('#nav-split').offsetHeight;
+     } catch (e) {
+         console.log('no nav split offset found');
+     }
+
+     document.querySelector(".container").style.paddingTop = navHeight + "px";
+     
      $('#clearButton').click(function() {
 
          var userHref = $('#userHref').text();
@@ -20,7 +28,19 @@
              }
          });
      });
- });
+
+    $(".postPing-btn").click(function() {
+        $.post("/postPing", function(data) {
+            var userName = data.userName;
+            refresh();
+        });
+    });
+
+    $("#getMap-btn").click(function() {
+        $.get("/getMap");
+    });
+
+});
 
  function logError(error) {
      console.log(error);

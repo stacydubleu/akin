@@ -3,6 +3,13 @@ var mapMarkers = [];
 $(function() {
 
     // class="jvectormap-marker jvectormap-element"
+     try {
+         var navHeight = document.querySelector('#nav-split').offsetHeight;
+     } catch (e) {
+         console.log('no nav split offset found');
+     }
+
+     document.querySelector(".container").style.paddingTop = navHeight + "px";
 
     $(".postPing-btn").click(function() {
         $.post("/postPing", function(data) {

@@ -1,27 +1,29 @@
 <link rel="stylesheet" href="/stylesheets/profile.css" type="text/css" media="screen" />
-<h1> HI {{userName}} </h1>
-{{#if ownProfile}}
-<h3 style="color:blue">This is your own profile page! We know because ownProfile variable is true.</h3>
-{{/if}}
-<h3 style="color:blue">*Do some customizations here when the owner of the profile views it, allow self modifications to information and arranging of items*</h3>
-<h2>Location: {{userLocation}}</h2>
-<h2 id="userHref" class="hidden">{{userHref}}</h2>
-<h2 id="signalStatus" style="color:{{signalColor}}">Current Signal Status: {{signal}}</h2>
-<button id="clearButton" type="button" class="btn btn-primary">CLEAR SIGNAL</button>
-<br>
-<br>
-<a href="/" style="font-size:32px">GO HOME</a>
-<br>
-<br>
-<h4>TODO:Make this profile page look better</h4>
-<h4>TODO:Redesign app look and feel ... matching: color palette / theme / layout</h4>
-<h4>TODO:Implement stickers/sounds/quotes to be given out to active Signal users</h4>
-<h4>TODO:Find how to connect pings to locations on map view and allow interactions</h4>
-<h4>TODO:Either request location access, OR have users mandatory fill out location during sign up</h4>
-<h4>TODO:Implement testing tools</h4>
-<br>
-<h4>Signal response options:</h4>
-<h4>Option 1: Give Random Happy Sticker</h4>
-<h4>Option 2: Give Random Music Note</h4>
-<h4>Option 3: Give Random *Relevant Motivation Quote</h4>
-<script src="/js/profile.js"></script>
+<div class="container">
+	<h1> HI {{userName}} </h1>
+	{{#if ownProfile}}
+	<h3 style="color:blue">This is your own profile page! We know because ownProfile variable is true.</h3>
+	{{/if}}
+	<h3 style="color:blue">*Do some customizations here when the owner of the profile views it, allow self modifications to information and arranging of items*</h3>
+	<h2>Location: {{userLocation}}</h2>
+	<h2 id="userHref" class="hidden">{{userHref}}</h2>
+	<h2 id="signalStatus" style="color:{{signalColor}}">Current Signal Status: {{signal}}</h2>
+	<button id="clearButton" type="button" class="btn btn-primary">CLEAR SIGNAL</button>
+	<br>
+	<br>
+	<a href="/" style="font-size:32px">GO HOME</a>
+	<br>
+	<br>
+	<h4>TODO:Make this profile page look better</h4>
+	<h4>TODO:Redesign app look and feel ... matching: color palette / theme / layout</h4>
+	<h4>TODO:Implement stickers/sounds/quotes to be given out to active Signal users</h4>
+	<h4>TODO:Find how to connect pings to locations on map view and allow interactions</h4>
+	<h4>TODO:Either request location access, OR have users mandatory fill out location during sign up</h4>
+	<h4>TODO:Implement testing tools</h4>
+	<br>
+	<h4>Signal response options:</h4>
+	<h4>Option 1: Give Random Happy Sticker</h4>
+	<h4>Option 2: Give Random Music Note</h4>
+	<h4>Option 3: Give Random *Relevant Motivation Quote</h4>
+	<script src="/js/profile.js"></script>
+</div>
