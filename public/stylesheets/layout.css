@@ -7,11 +7,11 @@ body {
     height: 100%;
     background: #1e79c1;
     background: linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font: 14px Helvetica, Arial, sans-serif;
     font-family: 'Roboto Condensed', sans-serif;
     color: #ffffff;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 a {
@@ -191,13 +191,15 @@ tbody {
         font-size: 4rem;
         margin: 3px auto
     }
-    #drop-down a:hover,
-    #drop-down a:active {
+    #drop-down a:hover {
         text-decoration: none;
         color: #15b4b6;
     }
     #drop-down a:active {
         color: #67ffc4;
+    }
+    #drop-down a:visited {
+        color: #ffffff;
     }
     #nav-smallview {
         text-align: center;
