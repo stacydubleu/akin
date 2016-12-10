@@ -29,8 +29,11 @@ module.exports.postLocation = function(request, response) {
 };
 
 module.exports.getProfile = function(request, response) {
-
+    name=request.user.givenName;
+    location="Something";
     sourceUserHref = request.user.href;
+    var userId = request.user.href;
+    var linkId = /[^/]*$/.exec(userId)[0];
     userHref = "https://api.stormpath.com/v1/accounts/" + request.params.userId;
 
     if (sourceUserHref === userHref) {
@@ -44,6 +47,8 @@ module.exports.getProfile = function(request, response) {
         else {
             userLocation = result.userLocation;
             userName = result.userName;
+            name=result.userName.toUpperCase();
+            location=result.userLocation;
             signal = result.signal;
             if (signal === "active") {
                 signalColor = 'green';
@@ -51,8 +56,11 @@ module.exports.getProfile = function(request, response) {
                 signalColor = 'red';
             }
             response.render('profile', {
+                name: name,
+                location: location,
                 userHref: userHref,
                 userName: userName,
+                userId: linkId,
                 signal: signal,
                 signalColor: signalColor,
                 userLocation: userLocation,
@@ -61,3 +69,5 @@ module.exports.getProfile = function(request, response) {
         }
     });
 };
+
+

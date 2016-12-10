@@ -5,7 +5,6 @@
      } catch (e) {
          console.log('no nav split offset found');
      }
-     console.log(navHeight);
 
      document.querySelector(".container").style.paddingTop = navHeight + "px";
 
