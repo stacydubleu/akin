@@ -6,7 +6,7 @@ module.exports.getMap = function(req, res) {
     var name = (req.user.givenName).toUpperCase();
     var userId = req.user.href;
     var linkId = /[^/]*$/.exec(userId)[0];
-    var signal = "inactive";
+    var signal = "";
     var userHref = "https://api.stormpath.com/v1/accounts/" + req.params.userId;
     
     req.db.collection('users').findOne({ "userId": userHref }, function(err, result) {

@@ -4,8 +4,10 @@ var userHref = "";
 var userName = "";
 var signal = "";
 var signalColor = "";
+var signalOpacity = "";
 var userLocation = "";
 var sourceUserHref = "";
+var signalBoolean = "";
 var ownProfile = false;
 
 
@@ -14,7 +16,7 @@ module.exports.postLocation = function(request, response) {
     var userLat = request.body.userLat;
     var userLong = request.body.userLong;
     userLocation = request.body.userLocation;
-    
+
     userHref = "https://api.stormpath.com/v1/accounts/" + request.body.userId;
 
     request.db.collection('users').update({ "userId": userHref }, {
@@ -29,8 +31,8 @@ module.exports.postLocation = function(request, response) {
 };
 
 module.exports.getProfile = function(request, response) {
-    name=request.user.givenName;
-    location="Something";
+    name = request.user.givenName;
+    location = "Something";
     sourceUserHref = request.user.href;
     var userId = request.user.href;
     var linkId = /[^/]*$/.exec(userId)[0];
@@ -47,14 +49,18 @@ module.exports.getProfile = function(request, response) {
         else {
             userLocation = result.userLocation;
             userName = result.userName;
-            name=result.userName.toUpperCase();
-            location=result.userLocation;
+            name = result.userName.toUpperCase();
+            location = result.userLocation;
             signal = result.signal;
             if (signal === "active") {
-                signalColor = 'green';
+                signalColor = '#0099ff';
+                signalOpacity = 1;
+                signalBoolean = 1;
             } else if (signal === "inactive") {
-                signalColor = 'red';
+                signalColor = '#555';
+                signalOpacity = .6;
             }
+
             response.render('profile', {
                 name: name,
                 location: location,
@@ -63,11 +69,11 @@ module.exports.getProfile = function(request, response) {
                 userId: linkId,
                 signal: signal,
                 signalColor: signalColor,
+                signalOpacity: signalOpacity,
+                signalBoolean: signalBoolean,
                 userLocation: userLocation,
                 ownProfile: ownProfile
             });
         }
     });
 };
-
-

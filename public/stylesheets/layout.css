@@ -199,14 +199,14 @@ tbody {
         text-align: left;
     }
     #nav-hello {
-        font-size: 5rem;
+        font-size: 16px;
     }
     #nav-wel {
-        font-size: 3rem;
+        font-size: 16px;
         padding-left: 1%;
     }
     #nav-home {
-        font-size: 4rem;
+        font-size: 16px;
     }
     #nav-largview {
         display: none;
@@ -216,9 +216,8 @@ tbody {
     }
     #drop-down {
         display: inline-block;
-        float: right;
-        font-size: 4rem;
-        margin: 3px auto
+        font-size: 16px;
+        margin: auto
     }
     #drop-down a:hover {
         text-decoration: none;
