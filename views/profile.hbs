@@ -10,7 +10,10 @@
             <h1 class="userName" style="text-transform:uppercase">{{userName}}'s profile page</h1>
             <hr>
             <h4>This is another users profile page, check out their collection and respond to their signal if they are in need!</h4>{{/if}}
-            <h3 id="location">Location: {{userLocation}}</h2>
+            <h3 id="location" class="location">Location: {{userLocation}}</h2>
+            {{#if minutesPosted}}
+            <h3 id="date" class="location">Minutes Since Signal Activation: {{minutesPosted}}</h3>
+            {{/if}}
 			<h3 id="userHref" style="display:none">{{userHref}}</h2>
 			<h3 id="sourceHref" style="display:none">{{sourceUserHref}}</h2>
 			<h3 id="signalStatus" style="color:white;opacity:{{signalOpacity}};display:table; padding: 5px 5px; background: rgba(255, 255, 255, 0.5);border-radius:4px">Signal Status: {{signal}}</h2>

@@ -9,6 +9,7 @@ var userLocation = "";
 var sourceUserHref = "";
 var signalBoolean = "";
 var ownProfile = false;
+var datePosted = "";
 
 
 module.exports.postLocation = function(request, response) {
@@ -55,6 +56,16 @@ module.exports.getProfile = function(request, response) {
             name = result.userName.toUpperCase();
             location = result.userLocation;
             signal = result.signal;
+            datePosted = result.date;
+
+            if (datePosted) {
+                var currentDate = new Date();
+                var dateDiff = Math.abs(currentDate - datePosted) / 60000;
+                var minutesPosted = Math.floor(dateDiff);
+            } else {
+                minutesPosted = "";
+            }
+
             if (signal === "active") {
                 signalColor = '#0099ff';
                 signalOpacity = 1;
@@ -76,6 +87,7 @@ module.exports.getProfile = function(request, response) {
                 userName: userName,
                 userId: linkId,
                 signal: signal,
+                minutesPosted: minutesPosted,
                 signalColor: signalColor,
                 signalOpacity: signalOpacity,
                 signalBoolean: signalBoolean,
