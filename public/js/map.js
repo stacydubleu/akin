@@ -55,7 +55,6 @@ $(function() {
             userLocation = mapMarkers[index].userLocation;
 
             event.preventDefault();
-
             document.getElementById("modName").innerHTML = userName;
 
             if ($('#globalName').text().toLowerCase() === userName.substr(0, userName.indexOf(' ')).toLowerCase()) {
@@ -65,25 +64,14 @@ $(function() {
                 $('#respondBtn').show();
                 document.getElementById('id01').style.display = 'block';
             }
-            // $.ajax({
-            //     url: '/deleteSignal',
-            //     method: 'DELETE',
-            //     dataType: 'json',
-            //     data: { userHref: userHref },
-            //     success: function() {
-            //         getMarkers();
-            //         alert('Cleared signal for ' + userName);
-            //     }
-            // });
         }
     });
-
 
     $("#profileBtn").click(function() {
         console.log(userHref);
         var linkId = /[^/]*$/.exec(userHref)[0];
         console.log(linkId);
-        window.location = "/profile/"+linkId;
+        window.location = "/profile/" + linkId;
 
         // $.get("/postPing", function(data) {
         //     var userName = data.userName;
