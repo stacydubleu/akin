@@ -8,19 +8,6 @@
 
      document.querySelector(".container").style.paddingTop = navHeight + "px";
 
-     $(document).ready(function() {
-         try {
-             var screen = $('body');
-             screen.ripples({
-                 resolution: 512,
-                 dropRadius: 20, //px
-                 perturbance: 0.04,
-             });
-         } catch (e) {
-             $('.error').show().text(e);
-         }
-     });
-
      refresh();
 
      //call refresh every 1.5 seconds
@@ -47,15 +34,15 @@
      $("#locationSubmit-btn").click(function() {
          var userLocation = $('#searchTextField').val();
          var userId = $('#userId').text();
+         var name = $('#globalName').text();
 
          if (userLocation) {
              $.get('/googleGeocode', { userLocation: userLocation }).done(function(response) {
-
                  if (response.status === "OVER_QUERY_LIMIT") {
                      alert('over query limit');
                  } else if (response.status === "OK") {
                      var latLong = response.results[0].geometry.location;
-                     postLocation(userLocation, latLong, userId);
+                     postLocation(name, userLocation, latLong, userId);
                  } else {
                      alert('invalid or empty location!');
                  }
@@ -65,18 +52,20 @@
          }
      });
 
-     function postLocation(userLocation, latLong, userId) {
-         $.post("/postLocation", { userLocation: userLocation, userLat: latLong.lat, userLong: latLong.lng, userId: userId }, function(data) {
+     function postLocation(name, userLocation, latLong, userId) {
+         $.post("/postLocation", { userName: name, userLocation: userLocation, userLat: latLong.lat, userLong: latLong.lng, userId: userId }, function(data) {
              window.location.replace('/');
          });
      }
 
      $(".postPing-btn").click(function() {
+        // $('body').css('background', 'linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4)');     
          $.post("/postPing", function(data) {
              var userName = data.userName;
              refresh();
          });
      });
+
 
      $("#getMap-btn").click(function() {
          $.get("/getMap");

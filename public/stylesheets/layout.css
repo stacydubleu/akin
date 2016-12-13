@@ -5,13 +5,42 @@ html {
 
 body {
     height: 100%;
-    background: #1e79c1;
-    background: linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4);
+    background: black;
+    /*background: #1e79c1;*/
+    /*background: linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4);*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font: 14px Helvetica, Arial, sans-serif;
     font-family: 'Roboto Condensed', sans-serif;
     color: #ffffff;
+}
+
+.animated{
+    height: 100%;
+    background: #9eb6c7;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    -webkit-backface-visibility: hidden;
+    animation: colorchange 25s; /* animation-name followed by duration in seconds*/
+         /* you could also use milliseconds (ms) or something like 2.5s */
+    -webkit-animation: colorchange 25s; /* Chrome and Safari */
+    -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes colorchange {
+    0%   { background-color: #9eb6c7; }
+    25%  { background-color: #2185aa; }
+    50% { background-color: #108c8e; }
+    75% { background-color: #50c799;}
+    100%   { background-color: #9eb6c7; }
+}
+
+@keyframes colorchange {
+    0%   { background-color: #9eb6c7; }
+    25%  { background-color: #2185aa; }
+    50% { background-color: #108c8e; }
+    75% { background-color: #50c799;}
+    100%   { background-color: #9eb6c7; }
 }
 
 a {
@@ -86,7 +115,6 @@ nav {
 #nav {
     top: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    position: fixed;
     z-index: 5;
 }
 
@@ -190,13 +218,15 @@ tbody {
         font-size: 16px;
         margin: auto
     }
-    #drop-down a:hover,
-    #drop-down a:active {
+    #drop-down a:hover {
         text-decoration: none;
         color: #15b4b6;
     }
     #drop-down a:active {
         color: #67ffc4;
+    }
+    #drop-down a:visited {
+        color: #ffffff;
     }
     #nav-smallview {
         text-align: center;

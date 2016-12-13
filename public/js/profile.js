@@ -52,13 +52,11 @@
          console.log('no nav split offset found');
      }
 
-
      if ($('#signalStatus').text() === "Signal Status: inactive") {
          $('#signalClose').hide();
      }
 
      if ($('#signalStatus').text() === "Signal Status: active") {
-         $('#signalStatus').addClass('animated infinite fadeIn');
          $('#signalOpen').hide();
      }
 
@@ -80,20 +78,22 @@
          }
      });
 
-     var fooSort = new Sortable(foo, {
-         group: "words",
-         animation: 150,
-         store: {
-             get: function(sortable) {
-                 var order = localStorage.getItem(sortable.options.group);
-                 return order ? order.split('|') : [];
-             },
-             set: function(sortable) {
-                 var order = sortable.toArray();
-                 localStorage.setItem(sortable.options.group, order.join('|'));
+     if (foo) {
+         var fooSort = new Sortable(foo, {
+             group: "words",
+             animation: 150,
+             store: {
+                 get: function(sortable) {
+                     var order = localStorage.getItem(sortable.options.group);
+                     return order ? order.split('|') : [];
+                 },
+                 set: function(sortable) {
+                     var order = sortable.toArray();
+                     localStorage.setItem(sortable.options.group, order.join('|'));
+                 }
              }
-         }
-     });
+         });
+     }
 
      document.querySelector(".container").style.paddingTop = navHeight + "px";
 
@@ -103,7 +103,6 @@
 
          $('#signalClose').hide();
          var userHref = $('#userHref').text();
-
          $.ajax({
              url: '/deleteSignal',
              method: 'DELETE',

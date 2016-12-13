@@ -7,7 +7,12 @@ module.exports.getPing = function(request, response) {
 
 module.exports.deleteSignal = function(request, response) {
 
+    var io = request.io;
     var userHref = request.body.userHref;
+    var userName = request.user.givenName;
+    var data = { userHref: userHref, userName: userName };
+    io.emit('respondPing', data);
+    console.log('after io');
 
     request.db.collection('users').update({ "userId": userHref }, {
         $set: {
@@ -59,6 +64,8 @@ module.exports.postPing = function(request, response) {
         }, { upsert: true }).then(function() {
             response.send({ userName: userName });
         });
+
+
     }
 
 };
