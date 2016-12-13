@@ -103,6 +103,7 @@
 
          $('#signalClose').hide();
          var userHref = $('#userHref').text();
+
          $.ajax({
              url: '/deleteSignal',
              method: 'DELETE',
