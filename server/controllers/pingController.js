@@ -1,7 +1,6 @@
 var path = require('path');
 var Promise = require("bluebird");
 
-var signaled=false;
 module.exports.getPing = function(request, response) {
 
 };
@@ -60,8 +59,6 @@ module.exports.postPing = function(request, response) {
         }, { upsert: true }).then(function() {
             response.send({ userName: userName });
         });
-
-
     }
 
 };
