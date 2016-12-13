@@ -15,15 +15,18 @@ module.exports.postLocation = function(request, response) {
 
     var userLat = request.body.userLat;
     var userLong = request.body.userLong;
+    userName = request.body.userName;
     userLocation = request.body.userLocation;
 
     userHref = "https://api.stormpath.com/v1/accounts/" + request.body.userId;
 
     request.db.collection('users').update({ "userId": userHref }, {
         $set: {
+            userName: userName,
             userLocation: userLocation,
             userLat: userLat,
-            userLong: userLong
+            userLong: userLong,
+            signal: "inactive"
         }
     }, { upsert: true }).then(function() {
         response.sendStatus(200);
@@ -59,6 +62,10 @@ module.exports.getProfile = function(request, response) {
             } else if (signal === "inactive") {
                 signalColor = '#555';
                 signalOpacity = .6;
+            } else {
+                signalColor = '#555';
+                signalOpacity = .6;
+                signal = "inactive";
             }
 
             response.render('profile', {

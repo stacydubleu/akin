@@ -34,15 +34,15 @@
      $("#locationSubmit-btn").click(function() {
          var userLocation = $('#searchTextField').val();
          var userId = $('#userId').text();
+         var name = $('#globalName').text();
 
          if (userLocation) {
              $.get('/googleGeocode', { userLocation: userLocation }).done(function(response) {
-
                  if (response.status === "OVER_QUERY_LIMIT") {
                      alert('over query limit');
                  } else if (response.status === "OK") {
                      var latLong = response.results[0].geometry.location;
-                     postLocation(userLocation, latLong, userId);
+                     postLocation(name, userLocation, latLong, userId);
                  } else {
                      alert('invalid or empty location!');
                  }
@@ -52,8 +52,8 @@
          }
      });
 
-     function postLocation(userLocation, latLong, userId) {
-         $.post("/postLocation", { userLocation: userLocation, userLat: latLong.lat, userLong: latLong.lng, userId: userId }, function(data) {
+     function postLocation(name, userLocation, latLong, userId) {
+         $.post("/postLocation", { userName: name, userLocation: userLocation, userLat: latLong.lat, userLong: latLong.lng, userId: userId }, function(data) {
              window.location.replace('/');
          });
      }

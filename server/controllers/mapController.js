@@ -7,21 +7,19 @@ module.exports.getMap = function(req, res) {
     var userId = req.user.href;
     var linkId = /[^/]*$/.exec(userId)[0];
     var signal = "";
-    var userHref = "https://api.stormpath.com/v1/accounts/" + req.params.userId;
-    
-    req.db.collection('users').findOne({ "userId": userHref }, function(err, result) {
-            try {
-                signal = result.signal;
-            } catch (e) {
-                // console.log(e);
-            }
+    var userHref = "https://api.stormpath.com/v1/accounts/" + linkId;
+
+    req.db.collection('users').findOne({ "userId": userId }, function(err, result) {
+        if (result.signal) signal = result.signal;
+        res.render('map', {
+            name: name,
+            location: 'null',
+            userId: linkId,
+            userHref: userHref,
+            signal: signal
+        });
     });
-    res.render('map', { 
-                name: name, 
-                location: 'null', 
-                userId: linkId, 
-                signal: signal
-    });
+
 };
 
 module.exports.getMarkers = function(req, res) {
