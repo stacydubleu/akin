@@ -8,10 +8,9 @@
 
      document.querySelector(".container").style.paddingTop = navHeight + "px";
 
-     refresh();
-
+     // refresh();
      //call refresh every 1.5 seconds
-     window.setInterval(refresh, 1500);
+     // window.setInterval(refresh, 1500);
 
      //refresh active signals log box
      function refresh() {
