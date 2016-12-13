@@ -16,30 +16,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
     <script>
-    function toggleNav() {
-        var x = document.getElementById("nav-smallview");
+        function toggleNav() {
+            var x = document.getElementById("nav-smallview");
 
-        if (x.className != "expanded") {
-            x.style.display = "block";
-            document.getElementById("nav").style.background="black";
-            x.style.background="black";
-            x.className = "expanded";
-        } else {
-            x.style.display = "none";
-            document.getElementById("nav").style.background="rgba(0, 0, 0, 0.6)";
-            x.className = "compressed";
+            if (x.className != "expanded") {
+                x.style.display = "block";
+                document.getElementById("nav").style.background="black";
+                x.style.background="black";
+                x.className = "expanded";
+            } else {
+                x.style.display = "none";
+                document.getElementById("nav").style.background="rgba(0, 0, 0, 0.6)";
+                x.className = "compressed";
+            }
         }
-    }
+
+        function disappear(){
+            $('#home-sendPing').fadeOut(400);
+        }
     </script>
 </head>
 <nav>
+    
     {{#if name}} {{#if location}}
+    <script src="/js/layout.js"></script>
     <div class="row text-center" id="nav">
         <table id="nav-split">
             <tr>
                 <td>
                     <div id="nav-greet">
+                           <div id="signal" style="display:none">{{signal}}</div>
                         <div id="nav-hello">HELLO {{name}}
                             <span id="nav-wel">Welcome to <a href="/" id="nav-home">AKIN</a></span>
                         </div>
@@ -78,9 +88,6 @@
                 </form>
             </li>
             <li>
-                <button style="margin-right:15px" id="postPing-btn" type="button" class="btn btn-success postPing-btn">SEND PING</button>
-            </li>
-            <li>
                 <form style="margin-right:15px" class="" action="/profile/{{userId}}" name="getBox" method="get">
                     <button id="navGetBox-btn" type="submit" class="btn btn-info">PROFILE</button>
                 </form>
@@ -95,7 +102,7 @@
     {{/if}} {{/if}}
 </nav>
 
-<body>
+<body class="animated">
     {{{body}}}
 </body>
 

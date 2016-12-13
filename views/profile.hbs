@@ -7,25 +7,16 @@
 			<h3 id="location">Location: {{userLocation}}</h2>
 			<h3 id="userHref" class="hidden">{{userHref}}</h2>
 			<h3 id="signalStatus" style="color:{{signalColor}}">Current Signal Status: {{signal}}</h2>
-			<button id="clearButton" type="button" class="btn btn-primary">CLEAR SIGNAL</button>
+			<button id="clearButton" type="button" class="btn btn-primary" onclick="changeBack()">CLEAR SIGNAL</button>
 		</div>
 	</div>
-	<br>
-	<br>
-	<a href="/" style="font-size:32px">GO HOME</a>
-	<br>
-	<br>
-	<h4>TODO:Make this profile page look better</h4>
-	<h4>TODO:Redesign app look and feel ... matching: color palette / theme / layout</h4>
-	<h4>TODO:Implement stickers/sounds/quotes to be given out to active Signal users</h4>
-	<h4>TODO:Find how to connect pings to locations on map view and allow interactions</h4>
-	<h4>TODO:Either request location access, OR have users mandatory fill out location during sign up</h4>
-	<h4>TODO:Implement testing tools</h4>
-	<br>
-	<h4>Signal response options:</h4>
-	<h4>Option 1: Give Random Happy Sticker</h4>
-	<h4>Option 2: Give Random Music Note</h4>
-	<h4>Option 3: Give Random *Relevant Motivation Quote</h4>
+	<br><br>
 	<br><br>
 	<script src="/js/profile.js"></script>
+	<script>
+	function changeBack(){
+		 $('body').removeClass('animated');
+		 $('body').css('background', 'black').fadeIn(2000);
+	};	
+	</script>
 </div>

@@ -1,7 +1,3 @@
-body{
-	background: black;
-}
-
 #akin-intro{
 	margin: 0 0 15px 0; 
 	font-size: 17rem;
@@ -197,15 +193,21 @@ canvas{
 	margin: 0 auto;
 }
 
+@keyframes fadeout {
+  to {
+    opacity: 0;
+  }
+}
+
 #home-sendPing{
-	box-sizing: border-box;
 	width: 100%;
 	font-size: 6rem;
 	height:0;
 	padding-bottom: 100%;
     border-radius: 50%;
   	overflow: hidden;
-    border: 3px solid transparent;
+    border: none;
+    opacity: 1;
     -webkit-animation-name: Floatingx;
     -webkit-animation-duration: 8s;
     -webkit-animation-iteration-count: infinite;
@@ -215,6 +217,11 @@ canvas{
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: ease-in-out;
 }
+
+.dont-show{
+	display:none;
+}
+
 
 @-webkit-keyframes Floatingx{
     from {-webkit-transform:translate(0px, 0px) rotate(2deg)}
@@ -236,21 +243,21 @@ canvas{
 	background: rgba(255, 255, 255, 0.5);
 }
 
+#home-sendPing button{
+	box-sizing: border-box;
+	display: block;
+	width: 102%;
+	padding: 32% 0 71% 0;
+	line-height: 1em;
+	font-size: 40px;
+}
+
 #home-screen button{
 	box-sizing: border-box;
 	word-wrap: break-word;
 	text-align: center;
 	background: rgba(255, 255, 255, 0.2);
-	border: 2px solid transparent;
-}
-
-#home-sendPing button{
-	box-sizing: border-box;
-	display: block;
-	width: 100%;
-	padding: 30% 0 70% 0;
-	line-height: 1em;
-	font-size: 40px;
+	border: none;
 }
 
 #home-map{

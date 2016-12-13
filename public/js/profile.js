@@ -11,7 +11,6 @@
      $('#clearButton').click(function() {
 
          var userHref = $('#userHref').text();
-
          $.ajax({
              url: '/deleteSignal',
              method: 'DELETE',

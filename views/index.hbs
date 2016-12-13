@@ -20,8 +20,9 @@
     <div id="home-screen">
         <div id="round">
             <div id="home-sendPing">
-                 <button id="postPing-btn" type="button" class="btn btn-success postPing-btn">SEND<br/>PING</button>
+                 <button id="postPing-btn" type="button" onclick="changeBack()"class="btn btn-success postPing-btn">SEND<br/>PING</button>
             </div>
+            <div id="sent" style="display:none; font-size: 5rem; float: center;">PING SENT</div>
         </div>
         <div class="home-buttons" id="home-map">
             <form class="" action="/getMap" name="getMap" method="get">
@@ -29,7 +30,7 @@
             </form>
         </div>
         <div class="home-buttons" id="home-profile">
-            <form action="/profile/{{userId}}" name="getBox" method="get">
+            <form actson="/profile/{{userId}}" name="getBox" method="get">
                 <button id="navGetBox-btn" type="submit" class="btn btn-info">PROFILE</button>
             </form>
         </div>
@@ -103,5 +104,27 @@ google.maps.event.addDomListener(window, 'load', initializeLocInput);
 
     </script>
 {{/unless}} {{#if name}}
-    <script src="/js/index.js"></script>
+<script>
+    $(document).ready(function() {
+         try {
+             var screen = $('body');
+             screen.ripples({
+                 resolution: 512,
+                 dropRadius: 20, //px
+                 perturbance: 0.04,
+             });
+         } catch (e) {
+             $('.error').show().text(e);
+         }
+    });
+
+    function changeBack(){
+        $('body').addClass('animated').fadeIn(2000);
+        $('#home-sendPing').fadeOut(2000);
+        $('#home-sendPing').addClass('dont-show');
+        $('#sent').delay(500).fadeIn(1000);
+    }
+
+</script>
+<script src="/js/index.js"></script>
 {{/if}}

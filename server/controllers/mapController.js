@@ -6,7 +6,22 @@ module.exports.getMap = function(req, res) {
     var name = (req.user.givenName).toUpperCase();
     var userId = req.user.href;
     var linkId = /[^/]*$/.exec(userId)[0];
-    res.render('map', { name: name, location: 'null', userId: linkId });
+    var signal = "inactive";
+    var userHref = "https://api.stormpath.com/v1/accounts/" + req.params.userId;
+    
+    req.db.collection('users').findOne({ "userId": userHref }, function(err, result) {
+            try {
+                signal = result.signal;
+            } catch (e) {
+                // console.log(e);
+            }
+    });
+    res.render('map', { 
+                name: name, 
+                location: 'null', 
+                userId: linkId, 
+                signal: signal
+    });
 };
 
 module.exports.getMarkers = function(req, res) {
