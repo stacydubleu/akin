@@ -1,5 +1,13 @@
  $(document).ready(function() {
 
+     try {
+         var navHeight = document.querySelector('#nav-split').offsetHeight;
+     } catch (e) {
+         console.log('no nav split offset found');
+     }
+
+     document.querySelector(".container").style.paddingTop = navHeight + "px";
+
      refresh();
 
      //call refresh every 1.5 seconds
@@ -26,17 +34,15 @@
      $("#locationSubmit-btn").click(function() {
          var userLocation = $('#searchTextField').val();
          var userId = $('#userId').text();
+         var name = $('#globalName').text();
 
          if (userLocation) {
-             // $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + userLocation + '&key=AIzaSyDWmhY4red18b-S6aVSQsbO3BYL8tL6fkY',
              $.get('/googleGeocode', { userLocation: userLocation }).done(function(response) {
-
                  if (response.status === "OVER_QUERY_LIMIT") {
                      alert('over query limit');
-                 }
-                 if (response.status === "OK") {
+                 } else if (response.status === "OK") {
                      var latLong = response.results[0].geometry.location;
-                     postLocation(userLocation, latLong, userId);
+                     postLocation(name, userLocation, latLong, userId);
                  } else {
                      alert('invalid or empty location!');
                  }
@@ -46,18 +52,20 @@
          }
      });
 
-     function postLocation(userLocation, latLong, userId) {
-         $.post("/postLocation", { userLocation: userLocation, userLat: latLong.lat, userLong: latLong.lng, userId: userId }, function(data) {
+     function postLocation(name, userLocation, latLong, userId) {
+         $.post("/postLocation", { userName: name, userLocation: userLocation, userLat: latLong.lat, userLong: latLong.lng, userId: userId }, function(data) {
              window.location.replace('/');
          });
      }
 
-     $("#postPing-btn").click(function() {
+     $(".postPing-btn").click(function() {
+        // $('body').css('background', 'linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4)');     
          $.post("/postPing", function(data) {
              var userName = data.userName;
              refresh();
          });
      });
+
 
      $("#getMap-btn").click(function() {
          $.get("/getMap");

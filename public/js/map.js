@@ -1,15 +1,43 @@
 var mapMarkers = [];
+var userHref = '';
+var userName = '';
+var userLocation = '';
 
 $(function() {
+
+    // class="jvectormap-marker jvectormap-element"
+    try {
+        var navHeight = document.querySelector('#nav-split').offsetHeight;
+    } catch (e) {
+        console.log('no nav split offset found');
+    }
+
+    document.querySelector(".container").style.paddingTop = navHeight + "px";
+
+    $(".postPing-btn").click(function() {
+        $.post("/postPing", function(data) {
+            var userName = data.userName;
+        });
+    });
+
+    $("#getMap-btn").click(function() {
+        $.get("/getMap");
+    });
+
     mapObj = new jvm.Map({
         container: $('#world-map'),
         map: 'world_mill',
         backgroundColor: '#66b3ff',
-        markersSelectable: true,
+        markersSelectable: false,
         markerStyle: {
             initial: {
-                fill: '#F8E23B',
+                fill: '#ff8080',
                 stroke: '#383f47'
+            },
+            hover: {
+                stroke: 'black',
+                "stroke-width": 2,
+                cursor: 'pointer'
             }
         },
         regionStyle: {
@@ -22,36 +50,61 @@ $(function() {
             }
         },
         onMarkerClick: function(event, index) {
+            userHref = mapMarkers[index].userId;
+            userName = mapMarkers[index].name;
+            userLocation = mapMarkers[index].userLocation;
 
-            var userHref = mapMarkers[index].userId;
-            var userName = mapMarkers[index].name;
+            event.preventDefault();
+            document.getElementById("modName").innerHTML = userName;
 
-            $.ajax({
-                url: '/deleteSignal',
-                method: 'DELETE',
-                dataType: 'json',
-                data: { userHref: userHref },
-                success: function() {
-                    getMarkers();
-                    alert('Cleared signal for ' + userName);
-                }
-            });
+            if ($('#globalName').text().toLowerCase() === userName.substr(0, userName.indexOf(' ')).toLowerCase()) {
+                $('#respondBtn').hide();
+                document.getElementById('id01').style.display = 'block';
+            } else {
+                $('#respondBtn').show();
+                document.getElementById('id01').style.display = 'block';
+            }
         }
     });
+
+    $("#profileBtn").click(function() {
+        console.log(userHref);
+        var linkId = /[^/]*$/.exec(userHref)[0];
+        console.log(linkId);
+        window.location = "/profile/" + linkId;
+
+        // $.get("/postPing", function(data) {
+        //     var userName = data.userName;
+        // });
+    });
+
+    $("#respondBtn").click(function() {
+        $.ajax({
+            url: '/deleteSignal',
+            method: 'DELETE',
+            dataType: 'json',
+            data: { userHref: userHref },
+            success: function() {
+                getMarkers();
+                console.log('Cleared signal for ' + userName);
+            }
+        });
+    });
+
 
     //function to get active signals and mark map
     getMarkers();
 
-    //call refresh every 3 seconds to get new signal markers on map
-    window.setInterval(getMarkers, 3000);
+    //call refresh every 2.5 seconds to get new signal markers on map
+    window.setInterval(getMarkers, 2500);
 });
 
 function getMarkers() {
 
-    mapObj.removeAllMarkers();
-    mapMarkers.length = 0;
-
     $.get("/getMarkers", function(data) {
+        mapObj.removeAllMarkers();
+        mapMarkers.length = 0;
+
         for (var i = 0; i < data.length; i++) {
             mapMarkers.push({
                 name: data[i].userName + ' @ ' + data[i].userLocation,

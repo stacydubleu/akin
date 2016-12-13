@@ -2,14 +2,29 @@ var path = require('path');
 var http = require('http');
 var request = require('request');
 
-module.exports.getMap = function(request, response) {
-    var name = (request.user.givenName).toUpperCase();
-    response.render('map', { name: name });
+module.exports.getMap = function(req, res) {
+    var name = (req.user.givenName).toUpperCase();
+    var userId = req.user.href;
+    var linkId = /[^/]*$/.exec(userId)[0];
+    var signal = "";
+    var userHref = "https://api.stormpath.com/v1/accounts/" + linkId;
+
+    req.db.collection('users').findOne({ "userId": userId }, function(err, result) {
+        if (result.signal) signal = result.signal;
+        res.render('map', {
+            name: name,
+            location: 'null',
+            userId: linkId,
+            userHref: userHref,
+            signal: signal
+        });
+    });
+
 };
 
-module.exports.getMarkers = function(request, response) {
-    request.db.collection('users').find({ "signal": "active" }).toArray(function(err, data) {
-        response.send(data);
+module.exports.getMarkers = function(req, res) {
+    req.db.collection('users').find({ "signal": "active" }).toArray(function(err, data) {
+        res.send(data);
     });
 };
 

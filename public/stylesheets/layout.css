@@ -1,62 +1,247 @@
-nav{
-	width: 100vw;
+html {
+    font-size: 1vw;
+    height: 100%;
 }
 
-#nav{ 
-	margin: 0 auto;
-	width: 100%;
-	background-color: rgba(0, 0, 0, 0.6);
+body {
+    height: 100%;
+    background: black;
+    /*background: #1e79c1;*/
+    /*background: linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4);*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font: 14px Helvetica, Arial, sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #ffffff;
 }
 
-tbody{
-	width: 100%;
+.animated{
+    height: 100%;
+    background: #9eb6c7;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-backface-visibility: hidden;
+    animation: colorchange 25s; /* animation-name followed by duration in seconds*/
+         /* you could also use milliseconds (ms) or something like 2.5s */
+    -webkit-animation: colorchange 25s; /* Chrome and Safari */
+    -webkit-animation-iteration-count: infinite;
 }
 
-#nav-split{
-	display: flex;
-	width: 100%;
-  	border-collapse: collapse;
+@-webkit-keyframes colorchange {
+    0%   { background-color: #9eb6c7; }
+    25%  { background-color: #2185aa; }
+    50% { background-color: #108c8e; }
+    75% { background-color: #50c799;}
+    100%   { background-color: #9eb6c7; }
 }
 
-.split{
-	width: 50%;
+@keyframes colorchange {
+    0%   { background-color: #9eb6c7; }
+    25%  { background-color: #2185aa; }
+    50% { background-color: #108c8e; }
+    75% { background-color: #50c799;}
+    100%   { background-color: #9eb6c7; }
 }
 
-#nav-greet{
-	margin: 10px 15px;
-	width: 50vw;
-	padding: 0 0 0 8%;
-	text-align: left;
-} 
-
-#nav-hello{
-	font-size: 2rem;
+a {
+    color: #ffffff;
 }
 
-#nav-wel{
-	font-size: 1.5rem;
-	padding-left: 1%;
+a:hover {
+    text-decoration: none;
+    color: #2aaada;
 }
 
-#nav-links{
-	display: flex;
-	width: 50vh;
-  	table-layout: fixed;
-  	border-collapse: collapse;
+a:active {
+    color: #67ffc4;
 }
 
-#nav-links button{
-	background: none;
-	font-size: 1.5rem;
-	margin: 3px 10px;
-	border: 2px solid transparent;
+#location-nav {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#location-nav #location-hello {
+    font-size: 5rem;
+}
+
+#location-nav #location-welcome {
+    font-size: 2.5rem;
+    margin: 10px 0;
+    display: block;
+}
+
+#location-nav #logout-button {
+    background: none;
+    font-size: 1.5rem;
+    margin: 3px 10px;
+    border: 2px solid transparent;
     border-radius: 4px;
 }
 
-#nav-links button:hover{
-	background: rgba(255, 255, 255, 0.2);
+#location-nav #logout-button:active,
+#location-nav #logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.25)
 }
 
-#nav-links button:active{
-	background: rgba(255, 255, 255, 0.5);
+#nav-home {
+    font-size: 1.3rem;
+}
+
+#nav-home:hover {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 3px 5px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#nav-home:active {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 3px 5px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+nav {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#nav {
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+}
+
+tbody {
+    width: 100%;
+}
+
+#drop-down {
+    display: none;
+}
+
+#nav-split {
+    display: flex;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#nav-greet {
+    margin: 3px 0 3px 0;
+    width: 40vw;
+    padding: 0 0 0 6%;
+    text-align: left;
+}
+
+#nav-hello {
+    font-size: 1.7rem;
+}
+
+#nav-wel {
+    font-size: 1.1rem;
+    padding-left: 1%;
+}
+
+#nav-links {
+    display: flex;
+    table-layout: fixed;
+    border-collapse: collapse;
+    padding-right: 20px;
+}
+
+#nav-links button {
+    float: right;
+    background: none;
+    font-size: 1.1rem;
+    margin: 3px 10px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+#nav-links button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#nav-links button:active {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+#nav-smallview {
+    display: none;
+}
+
+@media (max-width: 680px) {
+    #location-nav #location-hello {
+        font-size: 8rem;
+    }
+    #location-nav #location-welcome {
+        font-size: 5rem;
+        margin: 0;
+    }
+    #location-nav #logout-button {
+        font-size: 3rem;
+        margin-bottom: 8%;
+    }
+    #nav {
+    	margin:0 auto;
+        width: 100%;
+    }
+    #nav-greet {
+        margin: 3px auto;
+        width: 93vw;
+        text-align: left;
+    }
+    #nav-hello {
+        font-size: 16px;
+    }
+    #nav-wel {
+        font-size: 16px;
+        padding-left: 1%;
+    }
+    #nav-home {
+        font-size: 16px;
+    }
+    #nav-largview {
+        display: none;
+    }
+    #nav-links {
+        display: none;
+    }
+    #drop-down {
+        display: inline-block;
+        font-size: 16px;
+        margin: auto
+    }
+    #drop-down a:hover {
+        text-decoration: none;
+        color: #15b4b6;
+    }
+    #drop-down a:active {
+        color: #67ffc4;
+    }
+    #drop-down a:visited {
+        color: #ffffff;
+    }
+    #nav-smallview {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    #nav-smallview li {
+        list-style: none;
+    }
+    #nav-smallview button {
+        width: 100vw;
+        background: none;
+        font-size: 3rem;
+        margin: 3px;
+        border: none;
+    }
 }
