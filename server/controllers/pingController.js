@@ -17,6 +17,7 @@ module.exports.deleteSignal = function(request, response) {
     request.db.collection('users').update({ "userId": userHref }, {
         $set: {
             signal: "inactive",
+            date: ""
         }
     }, { upsert: true }).then(function() {
         response.send({ signal: 'inactive' });
@@ -41,6 +42,7 @@ module.exports.postPing = function(request, response) {
     var userId = request.user.href;
     var userName = request.user.givenName;
     var signal = "";
+    var datePosted = new Date();
 
     request.db.collection('users').findOne({ $and: [{ userId: userId }, { signal: "active" }] }, function(err, res) {
         if (res) {
@@ -59,7 +61,8 @@ module.exports.postPing = function(request, response) {
             $set: {
                 signal: "active",
                 userName: userName,
-                userEmail: request.user.email
+                userEmail: request.user.email,
+                date: datePosted
             }
         }, { upsert: true }).then(function() {
             response.send({ userName: userName });
