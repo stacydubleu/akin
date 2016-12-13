@@ -1,15 +1,18 @@
 var mapMarkers = [];
+var userHref = '';
+var userName = '';
+var userLocation = '';
 
 $(function() {
 
     // class="jvectormap-marker jvectormap-element"
-     try {
-         var navHeight = document.querySelector('#nav-split').offsetHeight;
-     } catch (e) {
-         console.log('no nav split offset found');
-     }
+    try {
+        var navHeight = document.querySelector('#nav-split').offsetHeight;
+    } catch (e) {
+        console.log('no nav split offset found');
+    }
 
-     document.querySelector(".container").style.paddingTop = navHeight + "px";
+    document.querySelector(".container").style.paddingTop = navHeight + "px";
 
     $(".postPing-btn").click(function() {
         $.post("/postPing", function(data) {
@@ -47,21 +50,59 @@ $(function() {
             }
         },
         onMarkerClick: function(event, index) {
-            var userHref = mapMarkers[index].userId;
-            var userName = mapMarkers[index].name;
+            userHref = mapMarkers[index].userId;
+            userName = mapMarkers[index].name;
+            userLocation = mapMarkers[index].userLocation;
 
-            $.ajax({
-                url: '/deleteSignal',
-                method: 'DELETE',
-                dataType: 'json',
-                data: { userHref: userHref },
-                success: function() {
-                    getMarkers();
-                    alert('Cleared signal for ' + userName);
-                }
-            });
+            event.preventDefault();
+
+            document.getElementById("modName").innerHTML = userName;
+
+            if ($('#globalName').text().toLowerCase() === userName.substr(0, userName.indexOf(' ')).toLowerCase()) {
+                $('#respondBtn').hide();
+                document.getElementById('id01').style.display = 'block';
+            } else {
+                $('#respondBtn').show();
+                document.getElementById('id01').style.display = 'block';
+            }
+            // $.ajax({
+            //     url: '/deleteSignal',
+            //     method: 'DELETE',
+            //     dataType: 'json',
+            //     data: { userHref: userHref },
+            //     success: function() {
+            //         getMarkers();
+            //         alert('Cleared signal for ' + userName);
+            //     }
+            // });
         }
     });
+
+
+    $("#profileBtn").click(function() {
+        console.log(userHref);
+        var linkId = /[^/]*$/.exec(userHref)[0];
+        console.log(linkId);
+        window.location = "/profile/"+linkId;
+
+        // $.get("/postPing", function(data) {
+        //     var userName = data.userName;
+        // });
+    });
+
+    $("#respondBtn").click(function() {
+        $.ajax({
+            url: '/deleteSignal',
+            method: 'DELETE',
+            dataType: 'json',
+            data: { userHref: userHref },
+            success: function() {
+                getMarkers();
+                console.log('Cleared signal for ' + userName);
+            }
+        });
+    });
+
 
     //function to get active signals and mark map
     getMarkers();
