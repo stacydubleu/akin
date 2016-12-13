@@ -8,19 +8,6 @@
 
      document.querySelector(".container").style.paddingTop = navHeight + "px";
 
-     $(document).ready(function() {
-         try {
-             var screen = $('body');
-             screen.ripples({
-                 resolution: 512,
-                 dropRadius: 20, //px
-                 perturbance: 0.04,
-             });
-         } catch (e) {
-             $('.error').show().text(e);
-         }
-     });
-
      refresh();
 
      //call refresh every 1.5 seconds
@@ -72,11 +59,13 @@
      }
 
      $(".postPing-btn").click(function() {
+        // $('body').css('background', 'linear-gradient(135deg, #cae9ff, #2aaada 30%, #15b4b6, #67ffc4)');     
          $.post("/postPing", function(data) {
              var userName = data.userName;
              refresh();
          });
      });
+
 
      $("#getMap-btn").click(function() {
          $.get("/getMap");

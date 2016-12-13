@@ -8,7 +8,7 @@ module.exports.getIndex = function(request, response) {
     var linkId = "";
     var location = "";
     var userHref = "";
-
+    var signal= "inactive";
     if (request.user) {
         status = true;
         name = (request.user.givenName).toUpperCase();
@@ -18,14 +18,29 @@ module.exports.getIndex = function(request, response) {
 
         request.db.collection('users').findOne({ "userId": userHref }, function(err, result) {
             try {
+                signal = result.signal;
                 location = result.userLocation;
             } catch (e) {
             	// console.log(e);
             }
-            response.render('index', { greeting: 'AKIN', name: name, userId: linkId, status: status, location: location });
+            response.render('index', { 
+                greeting: 'AKIN', 
+                name: name, 
+                userId: linkId, 
+                status: status, 
+                signal: signal, 
+                location: location 
+            });
         });
 
     } else {
-        response.render('index', { greeting: 'AKIN', name: name, userId: linkId, status: status, location: location });
+        response.render('index', { 
+            greeting: 'AKIN', 
+            name: name, 
+            userId: linkId, 
+            status: status, 
+            signal: signal, 
+            location: location 
+        });
     }
 };
