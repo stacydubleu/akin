@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="/stylesheets/profile.css" type="text/css" media="screen" />
+<script src="https://use.fontawesome.com/03c77c81ce.js"></script>
+<div class="container">
+    <div id="basic-profile" style="margin-top:10%;margin-bottom:75px">
+        <div id="profile-info">
+            {{#if ownProfile}}
+            <h1 class="userName" style="text-transform:uppercase">Hello {{userName}} </h1>
+            <hr>
+            <h4>This is your profile page! Other people viewing this page can see your signal collection and respond to your signal if it is active. </h4> {{else}}
+            <h1 class="userName" style="text-transform:uppercase">{{userName}}'s profile page</h1>
+            <hr>
+            <h4>This is another users profile page, check out their collection and respond to their signal if they are in need!</h4>{{/if}}
+            <h3 id="location">Location: {{userLocation}}</h2>
+			<h3 id="userHref" class="hidden">{{userHref}}</h2>
+			<h3 id="signalStatus" style="color:{{signalColor}};opacity:{{signalOpacity}};display:table; padding: 5px 5px; background: rgba(255, 255, 255, 0.5);border-radius:4px">Signal Status: {{signal}}</h2>
+			{{#if ownProfile}}
+			<button id="signalOpen" type="button" class="btn btn-primary signalButton">ACTIVATE SIGNAL</button>
+			{{else}}
+			<button id="signalClose" type="button" class="btn btn-primary signalButton">RESPOND TO SIGNAL</button>
+			{{/if}}
+		</div>
+	</div>
+	<h1 class="userName">ITEM COLLECTION</h1>
+	<hr>
+	{{#if ownProfile}}
+	<h4 style="margin-bottom:30px">View your collection and rearrange items by dragging them.</h4>
+	{{else}}
+	<h4 style="margin-bottom:30px">You are current viewing the item display belonging to {{userName}}. Help others out by responding to their signal calls to build your own collection!</h4>
+	{{/if}}
+	<div data-force="30" class="layer block" style="width:100%;margin-bottom:50px">
+	    <div class="layer title">Display Board</div>
+	    <ul id="board" class="block__list block__list_words" style="display:flex;flex-wrap:wrap">
+	    </ul>
+	</div>
+
+    {{#if ownProfile}}
+	<div style="display:flex;flex-direction:row;opacity:.9;justify-content:center">
+		<div data-force="25" class="layer block" style="width:100%">
+			<div class="layer title">Your Stickers</div>
+			<ul id="foo" class="block__list block__list_words" style="display:flex;flex-wrap:wrap">
+				<li><img src="/images/angel.png"/></li>
+				<li><img src="/images/cool.png"/></li>
+				<li><img src="/images/wince.png"/></li>
+				<li><img src="/images/wink.png"/></li>
+				<li><img src="/images/angel.png"/></li>
+				<li><img src="/images/angel.png"/></li>
+				<li><img src="/images/angel.png"/></li>
+				<li><img src="/images/cool.png"/></li>
+				<li><img src="/images/wince.png"/></li>
+				<li><img src="/images/wink.png"/></li>
+				<li><img src="/images/angel.png"/></li>
+				<li><img src="/images/angel.png"/></li>
+				<li><img src="/images/angel.png"/></li>
+				<li><img src="/images/cool.png"/></li>
+				<li><img src="/images/wince.png"/></li>
+				<li><img src="/images/wink.png"/></li>
+				<li><img src="/images/angel.png"/></li>
+				<li><img src="/images/angel.png"/></li>
+			</ul>
+		</div>
+	</div>
+	{{/if}}
+	<br>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.2/howler.js"></script>
+	<script src="/js/Sortable.js"></script>
+	<script src="/js/profile.js"></script>
+</div>

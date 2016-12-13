@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/stylesheets/jquery-jvectormap-2.0.3.css" type="text/css" media="screen" />
+<script src="/js/jquery-jvectormap-2.0.3.min.js"></script>
+<script src="/js/jquery-jvectormap-world-mill.js"></script>
+{{!-- body --}}
+<div class="container">
+    <div class="row text-center" style="margin-top:50px">
+        <h1 style="font-size:60px">WORLD VIEW</h1>
+        <div style="margin-left:20px;margin-right:20px;margin-top:50px">
+            <div id="world-map" style="max-width: 960px; height:400px; margin: 0 auto;margin-bottom:100px;border:3px solid"></div>
+        </div>
+    </div>
+</div>
+<div class="w3-container">
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width:720px;margin-top:10%">
+            <div style="display:flex;justify-content:center">
+                <h4 id="modName" style="color:gray"></h4>
+            </div>
+            <div style="display:flex;align-content:center;justify-content:space-around;">
+                <button style="margin-top:20px;margin-bottom:20px" id="profileBtn" type="button" class="btn btn-primary">View Profile</button>
+                <button style="margin-top:20px;margin-bottom:20px" id="respondBtn" type="button" class="btn btn-success">Answer Signal</button>
+            </div>
+            <div style="display:flex;justify-content:center" class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                <button onclick="document.getElementById('id01').style.display='none'" type="button" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- Map init script --}}
+<script type='text/javascript' src='/js/map.js'></script>
+{{!-- jVectorMap init script --}}
+<script>
+</script>
