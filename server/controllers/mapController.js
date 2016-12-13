@@ -1,6 +1,7 @@
 var path = require('path');
 var http = require('http');
 var request = require('request');
+var sourceUserHref = "";
 
 module.exports.getMap = function(req, res) {
     var name = (req.user.givenName).toUpperCase();
@@ -8,6 +9,7 @@ module.exports.getMap = function(req, res) {
     var linkId = /[^/]*$/.exec(userId)[0];
     var signal = "";
     var userHref = "https://api.stormpath.com/v1/accounts/" + linkId;
+    sourceUserHref = req.user.href;
 
     req.db.collection('users').findOne({ "userId": userId }, function(err, result) {
         if (result.signal) signal = result.signal;
@@ -16,6 +18,7 @@ module.exports.getMap = function(req, res) {
             location: 'null',
             userId: linkId,
             userHref: userHref,
+            sourceUserHref: sourceUserHref,
             signal: signal
         });
     });

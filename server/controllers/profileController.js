@@ -72,6 +72,7 @@ module.exports.getProfile = function(request, response) {
                 name: name,
                 location: location,
                 userHref: userHref,
+                sourceUserHref: sourceUserHref,
                 userName: userName,
                 userId: linkId,
                 signal: signal,

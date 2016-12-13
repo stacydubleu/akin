@@ -4,11 +4,15 @@
 
      socket.on('respondPing', function(data) {
          var globalId = $('#userHref').text();
+         var sourceHref = $('#sourceHref').text() || "";
          var responder = data.userName;
          var receiver = data.userHref;
          var receiverProfile = /[^/]*$/.exec(receiver)[0];
 
-         if (receiver === globalId) {
+         console.log(globalId);
+         console.log(sourceHref);
+
+         if (receiver === globalId && sourceHref===globalId) {
              alert(responder + ' has responded to your signal!');
              location.reload()
          }
