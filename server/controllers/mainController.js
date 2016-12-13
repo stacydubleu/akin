@@ -8,14 +8,17 @@ module.exports.getIndex = function(request, response) {
     var linkId = "";
     var location = "";
     var userHref = "";
+    var sourceUserHref = "";
     var signal = "inactive";
     var showButton = "";
+
     if (request.user) {
         status = true;
         name = (request.user.givenName).toUpperCase();
         userId = request.user.href;
         linkId = /[^/]*$/.exec(userId)[0];
         userHref = "https://api.stormpath.com/v1/accounts/" + linkId;
+        sourceUserHref = request.user.href;
 
         request.db.collection('users').findOne({ "userId": userHref }, function(err, result) {
             try {
@@ -32,6 +35,7 @@ module.exports.getIndex = function(request, response) {
                 name: name,
                 userId: linkId,
                 userHref: userHref,
+                sourceUserHref: sourceUserHref,
                 status: status,
                 signal: signal,
                 showButton: showButton,
@@ -48,6 +52,7 @@ module.exports.getIndex = function(request, response) {
             status: status,
             signal: signal,
             showButton: showButton,
+            sourceUserHref: sourceUserHref,
             location: location
         });
     }
